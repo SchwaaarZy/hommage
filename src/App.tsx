@@ -7,7 +7,6 @@ import {
   Check,
   ChevronDown,
   Download,
-  Feather,
   Heart,
   List,
   Menu,
@@ -38,6 +37,59 @@ type View =
   | "collections"
   | "favorites"
   | "index";
+
+function BretonFlag() {
+  const ermines = [
+    [5, 4],
+    [13, 4],
+    [5, 12],
+    [13, 12],
+  ];
+  return (
+    <svg
+      className="breton-mark"
+      viewBox="0 0 48 32"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {Array.from({ length: 9 }, (_, index) => (
+        <rect
+          key={index}
+          x="0"
+          y={(index * 32) / 9}
+          width="48"
+          height={32 / 9 + 0.05}
+          fill={index % 2 === 0 ? "#111111" : "#ffffff"}
+        />
+      ))}
+      <rect x="0" y="0" width="19" height="18" fill="#ffffff" />
+      <g
+        fill="none"
+        stroke="#111111"
+        strokeLinecap="round"
+        strokeWidth="1.1"
+      >
+        {ermines.map(([x, y]) => (
+          <path
+            key={`${x}-${y}`}
+            transform={`translate(${x} ${y})`}
+            d="M0 0v5M0 2L-2 0M0 2L2 0M0 4L-2 2M0 4L2 2"
+          />
+        ))}
+      </g>
+      <rect
+        x="0.5"
+        y="0.5"
+        width="47"
+        height="31"
+        fill="none"
+        stroke="#111111"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+}
+
 function savedValue<T>(key: string, fallback: T): T {
   try {
     return JSON.parse(localStorage.getItem(key) ?? "null") ?? fallback;
@@ -300,9 +352,13 @@ function App() {
   const activeNavView = current.view === "ouvrages" ? "ouvrages" : "poemes";
   const simpleHeader = (
     <header className="simple-header">
-      <a className="simple-brand" href="#poemes" aria-label="Les mots de Coco">
-        <Feather size={26} strokeWidth={1.1} aria-hidden="true" />
-        <span>Les mots de Coco</span>
+      <a
+        className="simple-brand"
+        href="#poemes"
+        aria-label="Les mots de Coco, accueil"
+        title="Accueil"
+      >
+        <BretonFlag />
       </a>
       <nav className="simple-main-nav" aria-label="Navigation principale">
         {navItems.map((item) => (
@@ -320,7 +376,7 @@ function App() {
   );
   const simpleFooter = (
     <footer className="simple-footer">
-      <Feather size={19} strokeWidth={1.1} aria-hidden="true" />
+      <BretonFlag />
       <p>Un héritage de mots transmis à travers les générations.</p>
       <p className="simple-quote">
         La dictature, c’est « ferme ta gueule » ; la démocratie, c’est « cause
@@ -573,12 +629,13 @@ function App() {
         Aller au contenu
       </a>
       <header className="site-header">
-        <a href="#poemes" className="brand" aria-label="Les mots de Coco">
-          <Feather size={25} strokeWidth={1.3} />
-          <span>
-            Les mots de Coco
-            <span className="brand-sub">UN HÉRITAGE DE MOTS</span>
-          </span>
+        <a
+          href="#poemes"
+          className="brand"
+          aria-label="Les mots de Coco, accueil"
+          title="Accueil"
+        >
+          <BretonFlag />
         </a>
         <nav className="desktop-nav" aria-label="Navigation principale">
           {navItems.map((item) => (
@@ -829,7 +886,7 @@ function App() {
         )}
       </main>
       <footer className="site-footer">
-        <Feather size={24} strokeWidth={1} />
+        <BretonFlag />
         <p>
           À la mémoire de notre Coco,
           <br />

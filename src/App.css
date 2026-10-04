@@ -22,15 +22,20 @@
 .simple-brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  font-family: "Crimson Text", Georgia, serif;
-  font-size: 25px;
-  white-space: nowrap;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
 }
-.simple-brand svg,
 .simple-ouvrages > svg {
   color: var(--gold);
+}
+.simple-brand .breton-mark,
+.brand .breton-mark {
+  display: block;
+  width: 36px;
+  height: 24px;
+  flex: 0 0 auto;
 }
 .simple-main-nav {
   display: flex;
@@ -330,9 +335,11 @@
   color: var(--muted);
   text-align: center;
 }
-.simple-footer > svg {
+.simple-footer > .breton-mark {
+  display: block;
+  width: 42px;
+  height: 28px;
   margin: 0 auto 14px;
-  color: var(--gold);
 }
 .simple-footer p {
   font-family: "Crimson Text", Georgia, serif;
@@ -362,11 +369,12 @@
     gap: 12px;
   }
   .simple-brand {
-    gap: 7px;
-    font-size: 20px;
+    width: 44px;
+    height: 44px;
   }
-  .simple-brand svg {
-    width: 22px;
+  .simple-brand .breton-mark {
+    width: 33px;
+    height: 22px;
   }
   .simple-main-nav {
     position: fixed;
@@ -512,22 +520,15 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 13px;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
 }
-.brand > svg {
-  color: var(--gold);
-}
-.brand > span {
-  font-family: "Crimson Text", Georgia, serif;
-  font-size: 27px;
-  line-height: 1.1;
-}
-.brand-sub {
+.brand .breton-mark {
   display: block;
-  font-family: "Manrope", sans-serif;
-  font-size: 9px;
-  margin-top: 7px;
-  color: var(--muted);
+  width: 36px;
+  height: 24px;
 }
 .desktop-nav {
   display: flex;
@@ -937,9 +938,11 @@
   padding: 60px 54px 24px;
   text-align: center;
 }
-.site-footer > svg {
+.site-footer > .breton-mark {
+  display: block;
+  width: 48px;
+  height: 32px;
   margin: 0 auto 15px;
-  color: var(--gold);
 }
 .site-footer > p {
   font-family: "Crimson Text", Georgia, serif;
@@ -1365,17 +1368,9 @@
     height: 72px;
     padding-inline: 16px;
   }
-  .brand > span {
-    font-size: 24px;
-  }
-  .brand-sub {
-    font-size: 8px;
-  }
-  .brand {
-    gap: 7px;
-  }
-  .brand > svg {
-    width: 20px;
+  .brand .breton-mark {
+    width: 33px;
+    height: 22px;
   }
   .header-actions {
     gap: 0;

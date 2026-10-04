@@ -108,6 +108,10 @@ test("accueil simple et accès aux poèmes", async ({ page }, testInfo) => {
   await expect(page.getByText(/La dictature, c’est « ferme ta gueule »/)).toBeVisible();
   await expect(page.getByRole("navigation")).toHaveCount(1);
   await expect(
+    page.getByRole("link", { name: "Les mots de Coco, accueil" }),
+  ).toBeVisible();
+  await expect(page.locator(".simple-brand")).toHaveText("");
+  await expect(
     page
       .getByRole("navigation", { name: "Navigation principale" })
       .getByRole("link"),
@@ -150,6 +154,16 @@ test("menu Poèmes et Ouvrages", async ({ page }) => {
       .sort((first, second) => first.title.localeCompare(second.title, "fr"))
       .map((poem) => poem.title),
   );
+});
+test("drapeau breton dans les en-têtes et pieds de page", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".simple-header .breton-mark")).toBeVisible();
+  await expect(page.locator(".simple-footer .breton-mark")).toBeVisible();
+  await expect(page.locator(".simple-brand")).toHaveText("");
+  await page.goto("/#library");
+  await expect(page.locator(".site-header .brand .breton-mark")).toBeVisible();
+  await expect(page.locator(".site-header .brand")).toHaveText("");
+  await expect(page.locator(".site-footer .breton-mark")).toBeVisible();
 });
 test("recherche, expression, thème et état vide", async ({ page }) => {
   await page.goto("/#library");
