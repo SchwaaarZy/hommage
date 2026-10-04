@@ -7,7 +7,6 @@ import {
   Check,
   ChevronDown,
   Download,
-  ExternalLink,
   Feather,
   Heart,
   List,
@@ -18,19 +17,27 @@ import {
   X,
 } from "lucide-react";
 import {
-  authorName,
   formatDate,
   isDemo,
   normalize,
-  originalImageUrl,
   poems,
   readingMinutes,
   themes,
   type Poem,
 } from "./poems";
+import { loadPoemLikeCounts, loadPoemLikeState, savePoemLike } from "./likes";
+import { isSupabaseConfigured } from "./supabase";
+import cocoPortrait from "../assets/coco.webp";
 import "./App.css";
 
-type View = "home" | "library" | "collections" | "favorites" | "index";
+type View =
+  | "home"
+  | "poemes"
+  | "ouvrages"
+  | "library"
+  | "collections"
+  | "favorites"
+  | "index";
 function savedValue<T>(key: string, fallback: T): T {
   try {
     return JSON.parse(localStorage.getItem(key) ?? "null") ?? fallback;
@@ -47,7 +54,7 @@ function route() {
       missing: !poems.some((item) => item.id === hash.slice(6)),
     };
   return {
-    view: (["library", "collections", "favorites", "index"].includes(hash)
+    view: (["poemes", "ouvrages", "library", "collections", "favorites", "index"].includes(hash)
       ? hash
       : "home") as View,
     poem: null,
@@ -66,6 +73,10 @@ function measurePoemPanels() {
   return heights;
 }
 
+const poemsAlphabetically = [...poems].sort((first, second) =>
+  first.title.localeCompare(second.title, "fr"),
+);
+
 function App() {
   const [current, setCurrent] = useState(route);
   const [dark, setDark] = useState(() => savedValue("poetry-dark", false));
@@ -78,6 +89,15 @@ function App() {
         )
       : [];
   });
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
+  const [likedPoemIds, setLikedPoemIds] = useState<string[]>([]);
+  const [likesReady, setLikesReady] = useState(false);
+  const [likeStatus, setLikeStatus] = useState(
+    isSupabaseConfigured
+      ? ""
+      : "Configurez Supabase pour activer les J’aime partagés.",
+  );
+  const [pendingLike, setPendingLike] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [theme, setTheme] = useState("Tous");
   const [sort, setSort] = useState("original");
@@ -87,6 +107,7 @@ function App() {
   const reduceMotion = useReducedMotion();
   const heading = useRef<HTMLHeadingElement>(null);
   const poemHeights = useRef(new Map<string, number>());
+  const selectedPoemFromList = useRef<string | null>(null);
   useLayoutEffect(() => {
     if (
       !reduceMotion &&
@@ -112,6 +133,9 @@ function App() {
     const change = () => {
       if (["#selected-poems", "#main"].includes(window.location.hash)) return;
       const next = route();
+      const wasSelectedFromList =
+        next.poem?.id === selectedPoemFromList.current;
+      if (wasSelectedFromList) selectedPoemFromList.current = null;
       poemHeights.current = measurePoemPanels();
       setCurrent(next);
       setMenu(false);
@@ -127,19 +151,21 @@ function App() {
             ),
           );
           if (window.location.hash !== `#poeme/${next.poem.id}`) return;
-          const summaryTop = poemElement?.getBoundingClientRect().top;
-          if (
-            summaryTop !== undefined &&
-            (summaryTop < 24 || summaryTop > window.innerHeight * 0.65)
-          ) {
-            poemElement?.scrollIntoView({
-              block: "start",
-              behavior:
-                reduceMotion ||
-                window.matchMedia("(prefers-reduced-motion: reduce)").matches
-                  ? "instant"
-                  : "smooth",
-            });
+          if (!wasSelectedFromList) {
+            const summaryTop = poemElement?.getBoundingClientRect().top;
+            if (
+              summaryTop !== undefined &&
+              (summaryTop < 24 || summaryTop > window.innerHeight * 0.65)
+            ) {
+              poemElement?.scrollIntoView({
+                block: "start",
+                behavior:
+                  reduceMotion ||
+                  window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                    ? "instant"
+                    : "smooth",
+              });
+            }
           }
           poemElement?.querySelector("summary")?.focus({ preventScroll: true });
         } else if (next.view !== "home") {
@@ -165,9 +191,30 @@ function App() {
     } catch {}
   }, [favorites]);
   useEffect(() => {
+    if (!isSupabaseConfigured) return;
+    let active = true;
+    void loadPoemLikeState()
+      .then((data) => {
+        if (!active) return;
+        setLikeCounts(data.counts);
+        setLikedPoemIds(data.likedPoemIds);
+        setLikesReady(true);
+        setLikeStatus("");
+      })
+      .catch(() => {
+        if (active)
+          setLikeStatus(
+            "J’aime partagés indisponibles. Vérifiez le schéma SQL et l’authentification anonyme dans Supabase.",
+          );
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+  useEffect(() => {
     document.title = current.poem
-      ? `${current.poem.title} · Les Poèmes`
-      : `Les Poèmes de ${authorName}`;
+      ? `${current.poem.title} · Les mots de Coco`
+      : "Les mots de Coco";
   }, [current]);
   useEffect(() => {
     if (notice) {
@@ -189,6 +236,31 @@ function App() {
         ? previous.filter((item) => item !== id)
         : [...previous, id],
     );
+    async function togglePoemLike(poemId: string) {
+      if (!likesReady || pendingLike) return;
+      const wasLiked = likedPoemIds.includes(poemId);
+      setPendingLike(poemId);
+      setLikeStatus("");
+      try {
+        await savePoemLike(poemId, !wasLiked);
+        setLikedPoemIds((previous) =>
+          wasLiked
+            ? previous.filter((id) => id !== poemId)
+            : [...previous, poemId],
+        );
+        setLikeCounts((previous) => ({
+          ...previous,
+          [poemId]: Math.max(0, (previous[poemId] ?? 0) + (wasLiked ? -1 : 1)),
+        }));
+        try {
+          setLikeCounts(await loadPoemLikeCounts());
+        } catch {}
+      } catch {
+        setLikeStatus("Impossible d’enregistrer ce J’aime. Réessayez.");
+      } finally {
+        setPendingLike(null);
+      }
+    }
   const goTo = (view: View) =>
     window.location.assign(view === "home" ? "#" : `#${view}`);
   const filtered = poems
@@ -222,9 +294,40 @@ function App() {
     }
   }
   const navItems: { view: View; label: string }[] = [
-    { view: "home", label: "Accueil" },
-    { view: "library", label: "Les poèmes" },
+    { view: "poemes", label: "POÈMES" },
+    { view: "ouvrages", label: "OUVRAGES" },
   ];
+  const activeNavView = current.view === "ouvrages" ? "ouvrages" : "poemes";
+  const simpleHeader = (
+    <header className="simple-header">
+      <a className="simple-brand" href="#poemes" aria-label="Les mots de Coco">
+        <Feather size={26} strokeWidth={1.1} aria-hidden="true" />
+        <span>Les mots de Coco</span>
+      </a>
+      <nav className="simple-main-nav" aria-label="Navigation principale">
+        {navItems.map((item) => (
+          <a
+            key={item.view}
+            href={`#${item.view}`}
+            className={activeNavView === item.view ? "active" : ""}
+            aria-current={activeNavView === item.view ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </header>
+  );
+  const simpleFooter = (
+    <footer className="simple-footer">
+      <Feather size={19} strokeWidth={1.1} aria-hidden="true" />
+      <p>Un héritage de mots transmis à travers les générations.</p>
+      <p className="simple-quote">
+        La dictature, c’est « ferme ta gueule » ; la démocratie, c’est « cause
+        toujours ».
+      </p>
+    </footer>
+  );
   const iconButton = (
     label: string,
     action: () => void,
@@ -290,27 +393,59 @@ function App() {
       </motion.article>
     );
   }
-  if (current.view === "home" || current.poem || current.missing) {
+  if (current.view === "ouvrages") {
     return (
       <div className="simple-site">
         <a className="skip-link" href="#main">
           Aller au contenu
         </a>
-        <header className="simple-header">
-          <Feather size={30} strokeWidth={1.1} aria-hidden="true" />
-        </header>
+        {simpleHeader}
+        <main id="main" tabIndex={-1} className="simple-main">
+          <section className="simple-tribute simple-ouvrages">
+            <h1 ref={heading} tabIndex={-1} className="simple-title">
+              Ouvrages
+            </h1>
+            <BookOpen size={34} strokeWidth={1.2} aria-hidden="true" />
+            <p className="simple-remembrance">
+              Aucun ouvrage pour le moment.
+            </p>
+          </section>
+        </main>
+        {simpleFooter}
+      </div>
+    );
+  }
+  if (
+    current.view === "home" ||
+    current.view === "poemes" ||
+    current.poem ||
+    current.missing
+  ) {
+    return (
+      <div className="simple-site">
+        <a className="skip-link" href="#main">
+          Aller au contenu
+        </a>
+        {simpleHeader}
         <main id="main" tabIndex={-1} className="simple-main">
           <section
             className="simple-tribute"
-            aria-label="Hommage à notre grand-père"
+            aria-label="Hommage à notre Coco"
           >
+            <figure className="simple-portrait">
+              <img
+                src={cocoPortrait}
+                alt="Coco"
+                width={1080}
+                height={608}
+                fetchPriority="high"
+              />
+            </figure>
             <p className="simple-dedication">
-              À la mémoire de notre grand-père
+              À la mémoire de notre Coco
             </p>
             <h1 ref={heading} tabIndex={-1} className="simple-title">
-              Les Poèmes de
-              <br />
-              <span>{authorName}</span>
+              Les mots de <span>Coco</span>
             </h1>
             <p className="simple-remembrance">
               Dont les mots continueront de traverser le temps.
@@ -325,72 +460,98 @@ function App() {
               Ce poème est introuvable.
             </p>
           )}
-          <ul className="simple-index">
-            {poems.map((poem) => (
-              <li key={poem.id}>
-                <details
-                  id={`poem-${poem.id}`}
-                  open={current.poem?.id === poem.id}
-                >
-                  <summary
-                    role="button"
-                    aria-expanded={current.poem?.id === poem.id}
-                    aria-controls={`text-${poem.id}`}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      if (current.poem?.id === poem.id) {
-                        poemHeights.current = measurePoemPanels();
-                        window.history.pushState(
-                          null,
-                          "",
-                          window.location.pathname + window.location.search,
-                        );
-                        setCurrent(route());
-                      } else {
-                        window.location.assign(`#poeme/${poem.id}`);
-                      }
-                    }}
+          {likeStatus && (
+            <p className="simple-likes-status" role="status">
+              {likeStatus}
+            </p>
+          )}
+          <ul
+            className="simple-index"
+            aria-busy={isSupabaseConfigured && !likesReady}
+          >
+            {poemsAlphabetically.map((poem) => {
+              const isLiked = likedPoemIds.includes(poem.id);
+              const likeCount = likeCounts[poem.id] ?? 0;
+              return (
+                <li key={poem.id}>
+                  <button
+                    className="simple-like-button"
+                    type="button"
+                    disabled={!likesReady || pendingLike !== null}
+                    title={
+                      isLiked
+                        ? `Retirer votre J’aime sur ${poem.title}`
+                        : `J’aime ${poem.title}`
+                    }
+                    aria-label={
+                      isLiked
+                        ? `Retirer votre J’aime sur ${poem.title}, ${likeCount} J’aime`
+                        : `J’aime ${poem.title}, ${likeCount} J’aime`
+                    }
+                    aria-pressed={isLiked}
+                    onClick={() => void togglePoemLike(poem.id)}
                   >
-                    <h2>{poem.title}</h2>
-                    <ChevronDown size={18} aria-hidden="true" />
-                  </summary>
-                  <article
-                    id={`text-${poem.id}`}
-                    className="simple-poem"
-                    aria-label={poem.title}
+                    <Heart
+                      size={18}
+                      strokeWidth={1.7}
+                      fill={isLiked ? "currentColor" : "none"}
+                      aria-hidden="true"
+                    />
+                    <span aria-hidden="true">{likeCount}</span>
+                  </button>
+                  <details
+                    id={`poem-${poem.id}`}
+                    open={current.poem?.id === poem.id}
                   >
-                    {poem.date && (
-                      <p className="simple-date">{formatDate(poem.date)}</p>
-                    )}
-                    {poem.dedication && (
-                      <p className="simple-poem-dedication">
-                        {poem.dedication}
-                      </p>
-                    )}
-                    <div className="simple-verses">
-                      {poem.text.split("\n\n").map((stanza, index) => (
-                        <p key={index}>{stanza}</p>
-                      ))}
-                    </div>
-                    {isDemo && (
-                      <p className="simple-demo">Texte de démonstration</p>
-                    )}
-                    {originalImageUrl(poem) && (
-                      <a
-                        className="simple-original"
-                        href={originalImageUrl(poem)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Voir la version illustrée de ${poem.title}`}
-                      >
-                        Voir la version illustrée{" "}
-                        <ExternalLink size={14} aria-hidden="true" />
-                      </a>
-                    )}
-                  </article>
-                </details>
-              </li>
-            ))}
+                    <summary
+                      role="button"
+                      aria-expanded={current.poem?.id === poem.id}
+                      aria-controls={`text-${poem.id}`}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        if (current.poem?.id === poem.id) {
+                          poemHeights.current = measurePoemPanels();
+                          window.history.pushState(
+                            null,
+                            "",
+                            window.location.pathname + window.location.search,
+                          );
+                          setCurrent(route());
+                        } else {
+                          selectedPoemFromList.current = poem.id;
+                          window.location.assign(`#poeme/${poem.id}`);
+                        }
+                      }}
+                    >
+                      <h2>{poem.title}</h2>
+                      <ChevronDown size={18} aria-hidden="true" />
+                    </summary>
+                    <article
+                      id={`text-${poem.id}`}
+                      className="simple-poem"
+                      aria-label={poem.title}
+                    >
+                      {poem.date && (
+                        <p className="simple-date">{formatDate(poem.date)}</p>
+                      )}
+                      {poem.dedication && (
+                        <p className="simple-poem-dedication">
+                          {poem.dedication}
+                        </p>
+                      )}
+                      <div className="simple-verses">
+                        {poem.text.split("\n\n").map((stanza, index) => (
+                          <p key={index}>{stanza}</p>
+                        ))}
+                      </div>
+                      {isDemo && (
+                        <p className="simple-demo">Texte de démonstration</p>
+                      )}
+                    </article>
+                  </details>
+                </li>
+              );
+            })}
           </ul>
           {poems.length === 0 && (
             <p className="simple-date">Aucun poème pour le moment.</p>
@@ -402,10 +563,7 @@ function App() {
             </p>
           )}
         </main>
-        <footer className="simple-footer">
-          <Feather size={19} strokeWidth={1.1} aria-hidden="true" />
-          <p>Un héritage de mots transmis à travers les générations.</p>
-        </footer>
+        {simpleFooter}
       </div>
     );
   }
@@ -415,23 +573,20 @@ function App() {
         Aller au contenu
       </a>
       <header className="site-header">
-        <a href="#" className="brand" aria-label="Les Poèmes, accueil">
+        <a href="#poemes" className="brand" aria-label="Les mots de Coco">
           <Feather size={25} strokeWidth={1.3} />
           <span>
-            Les Poèmes<span className="brand-sub">UN HÉRITAGE DE MOTS</span>
+            Les mots de Coco
+            <span className="brand-sub">UN HÉRITAGE DE MOTS</span>
           </span>
         </a>
         <nav className="desktop-nav" aria-label="Navigation principale">
           {navItems.map((item) => (
             <a
               key={item.view}
-              href={item.view === "home" ? "#" : `#${item.view}`}
-              className={
-                !current.poem && current.view === item.view ? "active" : ""
-              }
-              aria-current={
-                !current.poem && current.view === item.view ? "page" : undefined
-              }
+              href={`#${item.view}`}
+              className={activeNavView === item.view ? "active" : ""}
+              aria-current={activeNavView === item.view ? "page" : undefined}
             >
               {item.label}
             </a>
@@ -469,11 +624,9 @@ function App() {
           {navItems.map((item) => (
             <a
               key={item.view}
-              href={item.view === "home" ? "#" : `#${item.view}`}
+              href={`#${item.view}`}
               onClick={() => setMenu(false)}
-              aria-current={
-                !current.poem && current.view === item.view ? "page" : undefined
-              }
+              aria-current={activeNavView === item.view ? "page" : undefined}
             >
               {item.label}
             </a>
@@ -678,7 +831,7 @@ function App() {
       <footer className="site-footer">
         <Feather size={24} strokeWidth={1} />
         <p>
-          À la mémoire de notre grand-père,
+          À la mémoire de notre Coco,
           <br />
           dont les mots continueront de traverser le temps.
         </p>

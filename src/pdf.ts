@@ -20,7 +20,9 @@ export async function downloadCollection(collection: Poem[], title: string) {
   document.setFontSize(28);
   document.text(title, 105, 85, { align: "center" });
   document.setFontSize(17);
-  document.text(`Les Poèmes de ${authorName}`, 105, 105, { align: "center" });
+  document.text(`Les mots de Coco · ${authorName}`, 105, 105, {
+    align: "center",
+  });
   document.setFontSize(12);
   if (isDemo)
     document.text(
@@ -29,7 +31,7 @@ export async function downloadCollection(collection: Poem[], title: string) {
       125,
       { align: "center" },
     );
-  document.text("À la mémoire de notre grand-père", 105, 245, {
+  document.text("À la mémoire de notre Coco", 105, 245, {
     align: "center",
   });
   document.text("Décédé le 21 septembre 2026", 105, 253, { align: "center" });

@@ -1,13 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync } from "node:fs";
 
 type PoemFixture = {
   id: string;
   title: string;
   theme: string;
   text: string;
-  sourceImage: string;
   dedication?: string;
 };
 const works: PoemFixture[] = JSON.parse(
@@ -16,20 +15,105 @@ const works: PoemFixture[] = JSON.parse(
 const firstPoem = works[0];
 const secondPoem = works[1];
 
+test.beforeEach(async ({ page }) => {
+  const userId = "00000000-0000-4000-8000-000000000001";
+  const user = {
+    id: userId,
+    aud: "authenticated",
+    role: "authenticated",
+    email: "",
+    app_metadata: { provider: "anonymous", providers: ["anonymous"] },
+    user_metadata: {},
+    identities: [],
+    created_at: "2026-01-01T00:00:00.000Z",
+    is_anonymous: true,
+  };
+  const session = {
+    access_token: "test-access-token",
+    token_type: "bearer",
+    expires_in: 3600,
+    expires_at: 4102444800,
+    refresh_token: "test-refresh-token",
+    user,
+  };
+  const likedPoemIds = new Set<string>();
+
+  await page.route("**/auth/v1/signup", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ user, session }),
+    }),
+  );
+  await page.route("**/rest/v1/rpc/get_poem_like_counts", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(
+        [...likedPoemIds].map((poem_id) => ({ poem_id, likes_count: 1 })),
+      ),
+    }),
+  );
+  await page.route("**/rest/v1/poem_likes**", async (route) => {
+    const request = route.request();
+    if (request.method() === "GET") {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(
+          [...likedPoemIds].map((poem_id) => ({ poem_id })),
+        ),
+      });
+      return;
+    }
+    if (request.method() === "POST") {
+      const like = request.postDataJSON() as { poem_id: string };
+      likedPoemIds.add(like.poem_id);
+      await route.fulfill({ status: 201, body: "" });
+      return;
+    }
+    if (request.method() === "DELETE") {
+      const poemId =
+        new URL(request.url()).searchParams.get("poem_id")?.slice(3) ?? "";
+      likedPoemIds.delete(poemId);
+      await route.fulfill({ status: 204, body: "" });
+      return;
+    }
+    await route.fulfill({ status: 405, body: "" });
+  });
+});
+
 test("accueil simple et accès aux poèmes", async ({ page }, testInfo) => {
   const errors: string[] = [];
   await page.emulateMedia({ reducedMotion: "reduce" });
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Les Poèmes de",
+    "Les mots de Coco",
   );
+  const portrait = page.getByRole("img", {
+    name: "Coco",
+  });
+  await expect(portrait).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
   await expect(page.getByRole("searchbox")).toHaveCount(0);
   await expect(page.locator(".simple-index summary")).toHaveCount(works.length);
-  await expect(page.getByRole("navigation")).toHaveCount(0);
+  await expect(portrait).toHaveJSProperty(
+    "naturalWidth",
+    1080,
+  );
+  expect(
+    await portrait.evaluate((image) => image.getBoundingClientRect().width),
+  ).toBeLessThanOrEqual(360);
+  await expect(page.getByText(/La dictature, c’est « ferme ta gueule »/)).toBeVisible();
+  await expect(page.getByRole("navigation")).toHaveCount(1);
   await expect(
-    page.getByRole("region", { name: "Hommage à notre grand-père" }),
+    page
+      .getByRole("navigation", { name: "Navigation principale" })
+      .getByRole("link"),
+  ).toHaveText(["POÈMES", "OUVRAGES"]);
+  await expect(
+    page.getByRole("region", { name: "Hommage à notre Coco" }),
   ).toBeVisible();
   await page.reload();
   await expect(page.locator(".simple-index summary")).toHaveCount(works.length);
@@ -44,31 +128,54 @@ test("accueil simple et accès aux poèmes", async ({ page }, testInfo) => {
   await expect(page.locator("details[open] h2")).toHaveText(firstPoem.title);
   await expect(page.locator(".simple-index summary")).toHaveCount(works.length);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Les Poèmes de",
+    "Les mots de Coco",
   );
   expect(errors).toEqual([]);
+});
+test("menu Poèmes et Ouvrages", async ({ page }) => {
+  await page.goto("/#ouvrages");
+  await expect(page).toHaveTitle("Les mots de Coco");
+  await expect(page.getByRole("heading", { name: "Ouvrages" })).toBeVisible();
+  await expect(page.getByText("Aucun ouvrage pour le moment.")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "OUVRAGES", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await page.getByRole("link", { name: "POÈMES", exact: true }).click();
+  await expect(page).toHaveURL(/#poemes$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Les mots de Coco",
+  );
+  await expect(page.locator(".simple-index h2")).toHaveText(
+    [...works]
+      .sort((first, second) => first.title.localeCompare(second.title, "fr"))
+      .map((poem) => poem.title),
+  );
 });
 test("recherche, expression, thème et état vide", async ({ page }) => {
   await page.goto("/#library");
   await expect(page.locator(".poem-card")).toHaveCount(works.length);
   const search = page.getByRole("searchbox");
-  await search.fill("poesie");
+  await search.fill("soupirs pour exprimer l'espoir");
   await expect(page.locator(".poem-card")).toHaveCount(1);
-  await search.fill("le cœur est le seul passeport");
+  await search.fill("gagne-petit de l'amitié");
   await expect(page.locator(".poem-card")).toHaveCount(1);
-  await search.fill("Mémoire");
-  await expect(page.locator(".poem-card")).toHaveCount(2);
+  await search.fill("Hôpital");
+  await expect(page.locator(".poem-card")).toHaveCount(
+    works.filter((poem) => poem.theme === "Hôpital").length,
+  );
   await search.fill("xyz-introuvable");
   await expect(
     page.getByRole("heading", { name: "Aucun poème trouvé." }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Voir tous les poèmes" }).click();
-  await page.getByRole("button", { name: "Mémoire", exact: true }).click();
-  await expect(page.locator(".poem-card")).toHaveCount(2);
+  await page.getByRole("button", { name: "Hôpital", exact: true }).click();
+  await expect(page.locator(".poem-card")).toHaveCount(
+    works.filter((poem) => poem.theme === "Hôpital").length,
+  );
 });
 test("tri par date et titre", async ({ page }) => {
   await page.goto("/#library");
-  await page.getByRole("combobox").selectOption("newest");
+  await expect(page.locator(".poem-card")).toHaveCount(works.length);
   await expect(page.locator(".poem-card h3").first()).toHaveText(
     firstPoem.title,
   );
@@ -104,6 +211,35 @@ test("favoris et mode sombre persistants", async ({ page }) => {
     })
     .click();
   await expect(page.locator(".poem-card")).toHaveCount(0);
+});
+test("J’aime partagé, compteur et retrait après rechargement", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const like = page.getByRole("button", {
+    name: `J’aime ${firstPoem.title}, 0 J’aime`,
+    exact: true,
+  });
+  await expect(like).toHaveAttribute("aria-pressed", "false");
+  await like.click();
+  const liked = page.getByRole("button", {
+    name: `Retirer votre J’aime sur ${firstPoem.title}, 1 J’aime`,
+    exact: true,
+  });
+  await expect(liked).toHaveAttribute("aria-pressed", "true");
+  await page.reload();
+  const restoredLike = page.getByRole("button", {
+    name: `Retirer votre J’aime sur ${firstPoem.title}, 1 J’aime`,
+    exact: true,
+  });
+  await expect(restoredLike).toHaveAttribute("aria-pressed", "true");
+  await restoredLike.click();
+  await expect(
+    page.getByRole("button", {
+      name: `J’aime ${firstPoem.title}, 0 J’aime`,
+      exact: true,
+    }),
+  ).toHaveAttribute("aria-pressed", "false");
 });
 test("lecture directe et navigation", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -191,7 +327,18 @@ test("partage par un lien unique", async ({ page }) => {
 test("navigation et petit écran", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 740 });
   await page.goto("/");
+  await expect(
+    page.locator(".simple-main-nav").evaluate((element) =>
+      getComputedStyle(element).position,
+    ),
+  ).resolves.toBe("fixed");
   await expect(page.locator(".simple-index summary")).toHaveCount(works.length);
+  await expect(
+    page.getByRole("link", { name: "POÈMES", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "OUVRAGES", exact: true }),
+  ).toBeVisible();
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth + 1,
@@ -307,7 +454,9 @@ test("fluidité et fermeture sans saut", async ({ page }) => {
   await firstTitle.evaluate((element) =>
     element.scrollIntoView({ block: "start", behavior: "instant" }),
   );
-  const previousScroll = await page.evaluate(() => window.scrollY);
+  const previousTitleTop = await firstTitle.evaluate((element) =>
+    element.getBoundingClientRect().top,
+  );
   await firstTitle.click();
   await expect(page.locator("details[open]")).toHaveCount(0);
   await page.evaluate(async () => {
@@ -317,8 +466,12 @@ test("fluidité et fermeture sans saut", async ({ page }) => {
         .map((animation) => animation.finished.catch(() => undefined)),
     );
   });
+  const currentTitleTop = await firstTitle.evaluate((element) =>
+    element.getBoundingClientRect().top,
+  );
   expect(
-    Math.abs((await page.evaluate(() => window.scrollY)) - previousScroll),
+    Math.abs(currentTitleTop - previousTitleTop),
+    `Position du titre avant/après fermeture : ${previousTitleTop}px / ${currentTitleTop}px, scrollY ${await page.evaluate(() => window.scrollY)}px`,
   ).toBeLessThan(4);
   const animationCount = await page.evaluate(
     () =>
@@ -396,43 +549,38 @@ test("formats d’écran et titres longs", async ({ page }) => {
     );
   }
 });
-test("œuvres transcrites, dédicace et illustrations originales", async ({
-  page,
-  request,
-}) => {
+test("œuvres transcrites avec portrait et dédicaces", async ({ page }) => {
   const imageRequests: string[] = [];
+  await page.emulateMedia({ reducedMotion: "reduce" });
   page.on("request", (entry) => {
-    if (entry.resourceType() === "image" && /\.png(?:\?|$)/.test(entry.url()))
+    if (
+      entry.resourceType() === "image" &&
+      /\.(?:png|webp)(?:\?|$)/.test(entry.url())
+    )
       imageRequests.push(entry.url());
   });
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Yves Cholet",
+    "Les mots de Coco",
   );
   await expect(page.locator(".simple-demo")).toHaveCount(0);
   await expect(page.locator(".simple-poem .simple-date")).toHaveCount(0);
-  expect(imageRequests).toEqual([]);
+  await expect.poll(() => imageRequests.length).toBe(1);
+  expect(imageRequests[0]).toMatch(/coco.*\.webp(?:\?|$)/);
   for (const poem of works) {
-    expect(
-      existsSync(new URL(`../assets/${poem.sourceImage}`, import.meta.url)),
-    ).toBe(true);
-    await page.getByRole("button", { name: poem.title, exact: true }).click();
+    expect("sourceImage" in poem).toBe(false);
+    await page.evaluate((id) => {
+      window.location.hash = `poeme/${id}`;
+    }, poem.id);
     await expect(page.locator("details[open] h2")).toHaveText(poem.title);
     expect(
       await page.locator("details[open] .simple-verses p").allTextContents(),
     ).toEqual(poem.text.split("\n\n"));
-    const originalLink = page.locator("details[open]").getByRole("link", {
-      name: `Voir la version illustrée de ${poem.title}`,
-      exact: true,
-    });
-    await expect(originalLink).toHaveAttribute("target", "_blank");
-    const originalUrl = new URL(
-      (await originalLink.getAttribute("href"))!,
-      page.url(),
-    ).href;
-    const original = await request.head(originalUrl);
-    expect(original.ok()).toBe(true);
-    expect(original.headers()["content-type"]).toContain("image/png");
+    await expect(
+      page.locator("details[open]").getByRole("link", {
+        name: /version illustrée/,
+      }),
+    ).toHaveCount(0);
     if (poem.dedication)
       await expect(
         page.locator("details[open] .simple-poem-dedication"),

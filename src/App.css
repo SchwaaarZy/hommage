@@ -13,20 +13,54 @@
 .simple-header {
   width: min(880px, calc(100% - 64px));
   margin-inline: auto;
-  padding-block: 48px 12px;
+  padding-block: 30px 12px;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
-.simple-header a {
+.simple-brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   min-height: 44px;
   font-family: "Crimson Text", Georgia, serif;
-  font-size: 23px;
+  font-size: 25px;
+  white-space: nowrap;
 }
-.simple-header svg {
+.simple-brand svg,
+.simple-ouvrages > svg {
   color: var(--gold);
+}
+.simple-main-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 12px;
+}
+.simple-main-nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  color: var(--muted);
+}
+.simple-main-nav a.active {
+  color: var(--ink);
+}
+.simple-main-nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold);
+}
+.simple-main-nav a:focus-visible,
+.simple-brand:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
 }
 .simple-main {
   width: min(880px, calc(100% - 64px));
@@ -37,6 +71,24 @@
 .simple-tribute {
   text-align: center;
   padding-block: 8px 40px;
+}
+.simple-portrait {
+  width: min(100%, 360px);
+  aspect-ratio: 1672 / 941;
+  margin: 0 auto 14px;
+}
+.simple-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+.simple-ouvrages {
+  padding-top: 72px;
+}
+.simple-ouvrages > svg {
+  margin: 28px auto 0;
 }
 .simple-dedication {
   color: var(--gold);
@@ -81,6 +133,7 @@
   width: min(100%, 720px);
 }
 .simple-index li {
+  position: relative;
   border-bottom: 1px solid var(--line);
 }
 .simple-index li:first-child {
@@ -88,7 +141,7 @@
 }
 .simple-index summary {
   min-height: 82px;
-  padding: 24px 16px;
+  padding: 24px 64px;
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr) 24px;
   align-items: center;
@@ -134,12 +187,54 @@
   color: var(--gold);
   background: color-mix(in srgb, var(--paper) 70%, transparent);
 }
-.simple-index svg {
+.simple-index summary > svg {
   flex-shrink: 0;
   color: var(--gold);
   grid-column: 3;
   justify-self: center;
   transition: transform 0.3s;
+}
+.simple-like-button {
+  position: absolute;
+  z-index: 1;
+  top: 19px;
+  right: 10px;
+  display: flex;
+  min-width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 7px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.simple-like-button:hover,
+.simple-like-button[aria-pressed="true"] {
+  color: var(--gold);
+}
+.simple-like-button span {
+  min-width: 1.25em;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.simple-like-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.simple-like-button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.simple-likes-status {
+  width: min(100%, 720px);
+  margin: 0 auto 16px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
 }
 .simple-poem {
   padding: 12px 28px 32px;
@@ -194,22 +289,6 @@
   color: var(--muted);
   margin-top: 12px;
 }
-.simple-original {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 44px;
-  color: var(--muted);
-  font-size: 12px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  padding-inline: 12px;
-  margin-top: 12px;
-}
-.simple-original:hover {
-  color: var(--gold);
-}
 .simple-verses p {
   white-space: pre-line;
   margin-bottom: 32px;
@@ -260,6 +339,12 @@
   font-size: 20px;
   line-height: 1.5;
 }
+.simple-footer .simple-quote {
+  max-width: 40rem;
+  margin: 20px auto 0;
+  font-size: 17px;
+  font-style: italic;
+}
 .simple-footer span {
   display: block;
   margin-top: 12px;
@@ -272,10 +357,49 @@
     width: calc(100% - 40px);
   }
   .simple-header {
+    width: calc(100% - 24px);
     padding-block: 30px 8px;
+    gap: 12px;
+  }
+  .simple-brand {
+    gap: 7px;
+    font-size: 20px;
+  }
+  .simple-brand svg {
+    width: 22px;
+  }
+  .simple-main-nav {
+    position: fixed;
+    z-index: 20;
+    left: 50%;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: calc(100% - 24px);
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--background) 92%, transparent);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 6px 24px color-mix(in srgb, var(--ink) 14%, transparent);
+    font-size: 11px;
+  }
+  .simple-main-nav a {
+    min-height: 44px;
+    justify-content: center;
+    padding-inline: 18px;
+    border-radius: 5px;
+  }
+  .simple-main-nav a.active {
+    background: var(--paper);
+  }
+  .simple-main-nav a.active::after {
+    display: none;
   }
   .simple-main {
     padding-block: 18px 44px;
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
   }
   .simple-title {
     font-size: 27px;
@@ -296,6 +420,10 @@
   .simple-tribute {
     padding-bottom: 32px;
   }
+  .simple-portrait {
+    width: min(100%, 240px);
+    margin-bottom: 12px;
+  }
   .simple-tribute-rule {
     width: 52px;
     margin-top: 26px;
@@ -305,7 +433,11 @@
     min-height: 72px;
     grid-template-columns: 18px minmax(0, 1fr) 18px;
     gap: 8px;
-    padding: 20px 4px;
+    padding: 20px 52px;
+  }
+  .simple-like-button {
+    top: 14px;
+    right: 4px;
   }
   .simple-poem h1 {
     font-size: 32px;
@@ -322,6 +454,7 @@
   }
   .simple-footer {
     padding-block: 32px max(32px, env(safe-area-inset-bottom));
+    padding-bottom: calc(88px + env(safe-area-inset-bottom));
   }
   .simple-pages button {
     font-size: 11px;
@@ -332,14 +465,18 @@
   .simple-header {
     padding-block: 18px 6px;
   }
+  .simple-portrait {
+    width: min(100%, 180px);
+    margin-bottom: 8px;
+  }
   .simple-main {
     padding-top: 8px;
   }
   .simple-tribute {
-    padding-block: 0 20px;
+    padding-block: 0 6px;
   }
   .simple-dedication {
-    margin-bottom: 10px;
+    margin-bottom: 2px;
   }
   .simple-title {
     font-size: 26px;
@@ -350,10 +487,10 @@
   }
   .simple-remembrance {
     font-size: 20px;
-    margin-block: 12px 8px;
+    margin-block: 10px 6px;
   }
   .simple-tribute-rule {
-    margin-top: 16px;
+    margin-top: 10px;
   }
 }
 .content-width {

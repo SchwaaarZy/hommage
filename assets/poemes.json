@@ -1,66 +1,154 @@
 [
   {
-    "id": "le-paradis-des-poetes",
-    "title": "Le Paradis des Poètes",
-    "theme": "Poésie",
-    "sourceImage": "Le Paradis des Poètes au bord de mer.png",
-    "text": "Il existe un pays\noù les mots poussent comme des fleurs,\nun pays sans frontières\noù le cœur est le seul passeport.\n\nLà-bas, le temps n’a plus d’horloge,\nles jours se mesurent en émotions,\net les nuits s’éclairent de rêves\nque l’on partage sans raison.\n\nLes rivières chantent des poèmes,\nles arbres murmurent des vers,\nles oiseaux écrivent dans le ciel\ndes histoires pour l’univers.\n\nOn y croise des âmes voyageuses,\ndes cœurs tendres et des esprits libres,\ndes gens qui croient encore\nque la beauté peut changer la vie.\n\nLe Paradis des Poètes,\nc’est un refuge pour les rêveurs,\nun havre de paix pour les amoureux\ndes mots et des couleurs.\n\nAlors, si un jour tu te sens seul,\nferme les yeux et laisse ton imagination\nte guider sur le chemin de ce pays,\noù tout devient possible…\noù la poésie est reine\net où la vie est plus belle."
+    "id": "avant-propos",
+    "title": "Avant-propos et dédicace",
+    "theme": "Préface",
+    "text": "J'ai vécu de graves événements qu'il m'a fallu\ncacher pour ne pas heurter la sensibilité\nbourgeoise de mon entourage.\n\nJe me suis souvent tu pour ne pas cracher mes\nopinions et mes préférences.\n\nIl m'a fallu mentir ou acquiescer pour éviter\nl'explosion de MES vérités.\n\nJ'ai toujours souffert de déguiser ma haine en\nindifférence.\n\nAujourd'hui, enfin, je décide d'être MOI,\ndans ma logique (ou pas) et mes coups de\ngueule de quidam de la VIE.\n\nJe dédie cet ouvrage irrévérencieux :\nAux gagne-petit de l'amitié\nAux moins que rien de petites vies\nAux tant bien que mal du partage\nAux persos du bonheur\nDe l'amour sans couleur\nEt morts sans le faire exprès.\n\nYves CHOLET"
   },
   {
-    "id": "les-chemins-de-la-vie",
-    "title": "Les Chemins de la Vie",
-    "theme": "Le temps",
-    "sourceImage": "Les Chemins de la Vie au Bord de Mer.png",
-    "text": "Les chemins de la vie\nne sont pas toujours droits,\nils serpentent parfois\nentre ombres et lumières.\n\nOn y rencontre des gens,\ndes regards, des sourires,\ndes instants qui marquent,\net d’autres qui font grandir.\n\nChaque pas nous apprend,\nchaque détour nous façonne,\net même les épreuves\nsont des leçons qui résonnent.\n\nIl faut savoir prendre le temps,\nadmirer ce qui nous entoure,\nécouter le silence des paysages\net la sagesse du jour.\n\nCar la vie n’est pas une course,\nmais un voyage où l’on découvre\nla richesse des choses simples\net la beauté d’un cœur sincère.\n\nAlors, continuons ce chemin,\nlaissons nos rêves nous guider,\net croyons toujours\nà la lumière de demain."
-  },
-  {
-    "id": "les-petits-bonheurs",
-    "title": "Les Petits Bonheurs",
-    "theme": "Instants de vie",
-    "sourceImage": "Les Petits Bonheurs au Bord de Mer.png",
-    "text": "Les petits bonheurs\nsont souvent bien cachés,\ndans un rayon de soleil,\nun café partagé,\ndans le chant d’un oiseau,\nou le souffle du vent\nqui fait danser les feuilles.\n\nIls se trouvent dans un regard,\nune main tendue,\nun mot sincère,\nune rencontre inattendue\nqui illumine la journée.\n\nLes petits bonheurs\nne demandent pas grand-chose,\nils se glissent dans les choses simples,\nune promenade, un paysage,\nle rire d’un proche,\nle calme d’un soir.\n\nIls nous rappellent\nque la richesse de la vie\nne se mesure pas en biens,\nmais en instants partagés\net en émotions vraies.\n\nAlors, prenons le temps\nde les voir, de les savourer,\ncar ces petits bonheurs\ndonnent un grand sens\nà notre chemin."
-  },
-  {
-    "id": "les-souvenirs-d-hier",
-    "title": "Les Souvenirs d’Hier",
-    "theme": "Mémoire",
-    "sourceImage": "Les Souvenirs d’Hier au Bord de Mer.png",
-    "text": "Les souvenirs d’hier\nsont des étoiles dans nos cœurs,\nils brillent encore\nmême quand le temps s’en va.\n\nCe sont des visages, des voix,\ndes rires qui résonnent,\ndes moments simples\nqui deviennent des trésors.\n\nUn parfum de cuisine,\nune table bien garnie,\ndes récits sans fin\nau coin d’un feu de cheminée.\n\nLes saisons ont passé,\nles chemins ont changé,\nmais ces instants-là\nrestent gravés à jamais.\n\nIl suffit parfois d’un regard,\nd’une chanson, d’un paysage,\npour que le passé revienne,\ncomme une brise légère\nqui caresse l’âme.\n\nLes souvenirs d’hier\nne sont pas seulement du passé,\nils sont une partie de nous,\net ils continueront toujours\nà éclairer nos journées."
-  },
-  {
-    "id": "non-je-n-ai-pas-change",
-    "title": "Non, je n’ai pas changé",
-    "theme": "Espérance",
-    "sourceImage": "Non, je n’ai pas changé — Havre poétique.png",
-    "text": "Non, je n’ai pas changé.\n\nJ’ai toujours le même sens du voyage à travers\nle sourire d’un enfant curieux\net l’amour du prochain.\n\nNon, je n’ai pas changé.\n\nAvec mes longs silences devant l’absurdité,\nmon dégoût pour la guerre des hommes fous\net ma quête d’une vie meilleure.\n\nNon, je n’ai pas changé.\n\nJe porte toujours en moi\nquelques blessures anciennes,\nmais également l’espérance.\n\nNon, je n’ai pas changé.\n\nJe pense aux couleurs,\ncontre les gris de la vie,\naux sourires,\naux rêves,\nà l’amitié.\n\nNon, je n’ai pas changé …"
-  },
-  {
-    "id": "pourquoi-detester-le-monde-sans-vouloir-etre-utile",
-    "title": "Pourquoi détester le monde sans vouloir être utile",
-    "theme": "Instants de vie",
-    "sourceImage": "Poème calligraphié, village côtier breton.png",
-    "text": "Des troncs surmontés de tronches un peu rouges\n(notre bronzage à nous) jouent aux boules\nautour du monument aux morts.\n\nUne bonne odeur de saucisse grillée\nenvahit la Haute-Rue\net des charcuteries 100 % pur porc\nfleurissent entre l’église et la poste.\n\nLe Val-de-Rance et les galettes de Pont-Aven\nsponsorisent des tournois interminables\nde tarots et belotes de comptoir.\n\nUn autre boulanger authentique\nouvre ses portes dans les Ruettes.\n\nChouchou, humaniste et poète du demi-pression\na pris, à l’insu de son plein gré\nMarie-Jo pour épouse.\n\nUn projet de sex-shop est à l’étude à la Trinquette\nà la demande de certaines vieilles filles moustachues\nsecrètement amoureuses de Julien Lepers.\n\nDes montagnes de dunes ont poussé le long\ndu chêne Vert, zone non-constructible.\n\nDu muscadet bien frais coule miraculeusement\nde la fontaine, à côté du lavoir.\n\nLes estivants disent « bonjour » et « à tantôt »\net tout ce joli monde joue du biniou\nen attendant la suite.\n\nL’église ne fait plus recette, et ça se bouscule\nchez Marie-Ange pour les crêpes.\n\nDes androgynes à marée basse attendent\nleurs alter-ego à marée haute.\n\nPlus de marée noire, ni de vache folle\nun comité des fêtes qui fait enfin la fête.\n\nBernard, José, Noël et ma grand-mère\nsont toujours là.\n\nDemain, il fera beau …"
+    "id": "portrait-idyllique-du-bourg",
+    "title": "Portrait idyllique de mon bourg redevenu centre ville",
+    "theme": "Vie de village",
+    "text": "Des troncs surmontés de tronches un peu rouges\n(notre bronzage à nous) jouent aux boules\nautour du monument aux morts.\n\nUne bonne odeur de saucisse grillée\nenvahit la Haute-Rue\net des charcuteries 100 % pur porc\nfleurissent entre l'église et la poste.\n\nLe Val-de-Rance et les galettes de Pont-Aven\nsponsorisent des tournois interminables\nde tarots et belotes de comptoir.\n\nUn autre boulanger authentique\nouvre ses portes dans les Ruettes.\n\nChouchou, humaniste et poète du demi-pression\na pris, à l'insu de son plein gré\nMarie-Jo pour épouse.\n\nUn projet de sex-shop est à l'étude à la Trinquette\nà la demande de certaines vieilles filles moustachues\nsecrètement amoureuses de Julien Lepers.\n\nDes montagnes de dunes ont poussé le long\ndu chêne Vert, zone non-constructible.\n\nDu muscadet bien frais coule miraculeusement\nde la fontaine, à côté du lavoir.\n\nLes estivants disent « bonjour » et « à tantôt »\net tout ce joli monde joue du biniou\nen attendant la suite.\n\nL'église ne fait plus recette, et ça se bouscule\nchez Marie-Ange pour les crêpes.\n\nDes androgynes à marée basse attendent\nleurs alter-ego à marée haute.\n\nPlus de marée noire, ni de vache folle\nun comité des fêtes qui fait enfin la fête.\n\nBernard, José, Noël et ma grand-mère\nsont toujours là.\n\nDemain, il fera beau."
   },
   {
     "id": "qu-on-etait-bien-ces-annees-la",
-    "title": "Qu’on était bien ces années-là...",
+    "title": "Qu'on était bien ces années-là...",
     "theme": "Mémoire",
-    "sourceImage": "Souvenirs d’été au bord de mer.png",
-    "text": "Long voyage de Paris à Lamballe,\ntrain à vapeur, figure et mains sales.\n\nLes dunes à l’abri du vent,\nles crottes de biquettes,\nles genêts, les ajoncs\nqui claquaient au soleil d’été.\n\nSupplice des bains de mer glacés,\nà marée basse,\nfrissons pour revenir à la digue.\n\nPêche aux coques,\nrâteau et panier en osier,\nun peu la trouille à cause du gué\nentre les algues vertes.\n\nGrignotement des mulots,\nvol de chauve-souris,\nsauterelles et papillons.\n\nLa corvée des visites aux cousines et cousins\nqui n’avaient rien à dire.\n\nMarché de Matignon, obligatoire, incontournable,\nchoux verts et saucisse.\n\nDiabolo et jokari sur la plage,\ngrand-mère attentive à la fenêtre,\nle silence de la sieste.\n\nTartines de confiture,\nsurvol inquiétant et menaçant des guêpes,\net les doigts collants.\n\nPommes de terre, lait baratté,\npoussière du blé moissonné,\nlait chaud et crémeux du Val Saint-Rieul.\n\nCueillette des cerises et noisettes,\nmûres et groseilles,\nalchimie d’apéritifs et de liqueurs maison.\n\nCabane au fond du jardin,\njournal pendu au clou,\nballet des mouches vertes\nattirées par le trou.\n\nPetits câlins au fond des couloirs\nou dans les toilettes\nde la salle des jeux.\n\nMassifs d’hortensias,\norties et toiles d’araignées,\nfeu d’artifice,\nrares sorties dans la nuit.\n\nL’eau fraîche de la fontaine\net le lavoir qui moussait,\nle linge battu, les femmes à genoux.\n\nFête paroissiale, bagad,\nroue à dix balles,\nprocession du quinze août à la Garde,\nbannières, cantiques et goupillon.\n\nParfum de cierges et d’encens,\nquelques pièces dérobées à la quête,\nfleurs au cimetière et vers luisants.\n\nQu’on était bien ces années-là..."
+    "text": "Long voyage de Paris à Lamballe\nTrain à vapeur, figure et mains sales\n\nLes dunes à l'abri du vent\nLes crottes de biquettes\nLes genêts, les ajoncs\nQui claquaient au soleil d'été\n\nSupplice des bains de mer glacés\nÀ marée basse\nFrissons pour revenir à la digue\n\nPêche aux coques\nRâteau et panier en osier\nUn peu la trouille à cause du gué\nEntre les algues vertes\n\nGrignotement des mulots\nVol de chauve-souris\nSauterelles et papillons\n\nLa corvée des visites\nAux cousines et cousins\nQui n'avaient rien à dire\n\nMarché de Matignon\nObligatoire, incontournable\nChoux verts et saucisse\n\nDiabolo et jokary sur la plage\nGrand-mère attentive à la fenêtre\nLe silence de la sieste\n\nTartines de confiture\nSurvol inquiétant\nEt menaçant des guêpes\nEt les doigts collants\n\nPommes de terre, lait baratté\nLa poussière du blé moissonné\nLait chaud et crémeux du Val St Rieul\n\nCueillette des cerises et noisettes\nDes mûres et groseilles\nAlchimie d'apéritif et liqueur-maison\n\nCabane au fond du jardin\nJournal pendu au clou\nBallet des mouches vertes\nAttirées par le trou\n\nPetits câlins au fond des couloirs\nOu dans les toilettes\nDe la salle des jeux\n\nMassifs d'hortensias\nOrties et toiles d'araignées\nFeu d'artifice\nRare sortie dans la nuit\n\nL'eau fraîche de la fontaine\nEt le lavoir qui moussait\nLe linge battu, les femmes à genoux\n\nFête paroissiale, le bagad\nEt la roue à dix balles\nProcession du 15 août à la Garde\nBannières, cantiques et goupillon\n\nParfum de cierges et d'encens\nQuelques pièces dérobées à la quête\nFleurs au cimetière et vers luisants\n\nQu'on était bien ces années-là..."
   },
   {
     "id": "1968",
     "title": "1968",
     "theme": "Voyage",
-    "dedication": "À Yves Amiet",
-    "sourceImage": "Voyage poétique vers l’horizon.png",
-    "text": "Je vous invite à me suivre\npour un long voyage sans retour,\n\nsans ticket et sans bagage,\n\nun de ces voyages de rêves\nqu’on attrape à vingt ans\ncomme un rhume, comme une maladie.\n\nNous chercherons une âme sans nom\net un long train qui ne s’arrêtera\nqu’au bout de la fin.\n\nAprès avoir atteint le pays\nqui ne figure pas sur la carte,\n\nil faudra penser à détruire\nnos identités.\n\nPuis, en découvrant l’amour,\nl’amour de nulle part,\nl’amour de personne,\n\nnous construirons une nouvelle vie.\n\nUne vie pour la Vie."
+    "dedication": "À Yves Amiot",
+    "text": "Je vous invite à me suivre\nPour un long voyage sans retour\nSans ticket de quai sans bagage\nUn de ces voyages de rêves\nQu'on attrape à vingt ans\nComme un rhume comme une maladie.\n\nNous chercherons une gare sans nom\nEt un long train qui ne s'arrêtera\nQu'au bout à la fin.\n\nAprès avoir atteint le pays\nQui ne figure pas sur la carte\nIl faudra penser à détruire nos identités\nLes souvenirs de ce que nous aurons fait\nLe regret des choses mal faites\nOu pas faites du tout :\nOn trouvera un travail sans registre du commerce\nEt sans bulletin de salaire.\n\nPuis on découvrira l'amour\nL'amour de nulle part\nL'amour de personne\nSentiment vide de désir\nSans jalousie et sans passion.\n\nJe vous invite à me suivre dans ce pays sans nom\nPour une vie nouvelle qui n'est pas une vie\nPuisque c'est LA VIE\nCe sera LA VIE de mes vingt ans\nEt un peu plus\nLA VIE de mes rêves et de ma lâcheté\nFace à la jurisprudence et aux cartes perforées.\n\nJe vous invite à me suivre là-bas\nPour tout ça\nPour ce rien\nPour LA VIE\nPour cet anti... quelque chose."
   },
   {
     "id": "etre-libre",
     "title": "Être libre",
     "theme": "Liberté",
-    "sourceImage": "Être libre au bord de la mer.png",
-    "text": "Être libre,\nce n’est pas la porte de prison qui s’ouvre,\nce n’est pas la volonté d’écrou qui défaille,\nce n’est pas quitter sa maison,\nle dos tourné à la foule.\nles yeux ouverts sur les autres.\n\nÊtre libre,\nc’est la passion pour ce qui est bien,\nc’est apprendre à rire aux éclats\ncomme un gosse du quartier.\nPardonner aux ennemis,\nouvrir son cœur à chacun.\n\nÊtre libre,\nc’est aimer le soleil et les champs,\nmarcher sur le chemin qui conduit l’homme au jour.\nC’est avoir, par-dessus tout,\nl’amitié et le vent.\n\nÊtre libre,\nc’est être poète et un peu fou."
+    "text": "Être libre, ce n'est pas la porte de prison qui s'ouvre,\nCe n'est pas le bulletin d'écrou qu'on déchire.\nÊtre libre, ce n'est pas quitter sa maison, le dos tourné à la foule,\nÊtre libre, c'est ouvrir les yeux, aimer, c'est vivre.\n\nÊtre libre, c'est la passion pour ce qui est beau, ce qui est bien,\nC'est apprendre à rire aux éclats comme un gosse du quartier,\nPardonner aux ennemis, ouvrir son cœur à chacun,\nÊtre libre, c'est croire en un Dieu créateur, c'est la joie d'aimer.\n\nÊtre libre, c'est aimer le soleil et les champs,\nMarcher sur le chemin qui conduit n'importe où,\nC'est n'avoir pas d'argent, c'est l'amitié et le vent.\nÊtre libre, c'est être poète et un peu fou."
+  },
+  {
+    "id": "non-je-n-ai-pas-change",
+    "title": "Non je n'ai pas changé",
+    "theme": "Mémoire",
+    "text": "Non je n'ai pas changé\nJe suis toujours le même\nLes cheveux de travers\nLe sourire d'un enfant soucieux\nEt l'amour du prochain\n\nNon je n'ai pas changé\nAvec mes longs silences devant l'absurdité\nMa passion pour les gosses du quartier\nMon dégoût pour la guerre des hommes fous\n\nCelui que vous avez jadis connu\nSa bonne tête et ses ongles rongés\nIl est de nouveau là il est revenu\nSeul et sans rien comme avant à jamais\n\nNon je n'ai pas changé\nEt je n'ai rien oublié\nLes poubelles le béton griffonné\nPolitique bonnes manières\nC.R.S. arrières-pensées\n\nEt ces pancartes de fer\nPelouses interdites\nQui condamnent les enfants\nCes enfants qui trop vite grandissent\nAu-milieu des sexes à pognon\nDes assurances sociales\nEt de la pollution\n\nSans connaître la mer\nAvant vingt ans\nAvant les chaises longues\nLes crèmes les casinos\n\nNon je n'ai pas changé\nEt je n'ai pu changer\nLes aiguilles de la montre\nQui se traînent qui avancent\nDans un monde déséquilibré\nMarqué par la fin\nInexorablement\n\nNon je n'ai pas changé\nLe poème est toujours en colère\nContre moi peut-être\nQui le meurtris si bien\nPeut-être contre vous\nQui compliquez les choses\nPeut-être à cause des autres\nQui ne comprennent rien...\n\nYves Cholet"
+  },
+  {
+    "id": "le-paradis-des-poetes",
+    "title": "Le Paradis des poètes",
+    "theme": "Mort et espérance",
+    "text": "Quand je mourrai, à bout de souffrance des autres,\nquand mes pages de poèmes n'auront servi à rien,\nquand mes yeux se fermeront à toutes les fautes\ndes hommes, à l'amour, à la guerre, à la faim.\n\nJe veux pour linceul une fusée verte,\ncouleur d'espoir, de paix et de bonheur,\npour me mentir et m'éloigner de la terre\nque j'ai tant aimée, mais qui me fait peur.\n\nJe m'envolerai dans ce vaisseau spatial,\nje traverserai l'orbite terrestre et enfin,\nje verrai la lune sur toutes ses faces\net j'oublierai tout le monde, enfin...\n\nJe veux me saouler du bleu du ciel,\nembrasser les étoiles, m'enivrer de l'infini\nde ce paradis lunaire réservé aux poètes,\nparadis gagné pour mon amour de la vie."
+  },
+  {
+    "id": "evangile-de-la-pitie",
+    "title": "Évangile de la pitié",
+    "theme": "Engagement",
+    "text": "Quand vous me verrez passer sur vos sentiers de tous les jours,\nÀ l'heure où le ciel est encore chargé de nuit,\nOù les hommes-gamelles avancent, fatigués, vers l'usine\nAvec la musette aussi sale de vin rouge que la veille,\nJ'aurai honte de porter cravate et col amidonné,\nJ'aurai mal de ne pouvoir les aider,\nles faire rire,\nles aimer.\n\nQuand vous me verrez passer sur vos chemins d'écoliers,\nÀ l'heure où le soleil fait brûler la campagne,\nOù les gosses se bousculent dans les caniveaux d'eau sale,\nAvec le linge aux fenêtres et des odeurs de choses moisies,\nJ'aurai honte de me sentir si tranquille et si fort,\nJ'aurai mal de leurs faiblesses,\nleur joie déguisée,\nleurs sacrifices,\nleurs congés-payés.\n\nQuand vous me verrez passer sur vos sentiers de la guerre,\nÀ l'heure où les étoiles offrent quelques heures de paix,\nOù les soldats se posent ces questions qui condamnent,\nAvec l'école du crime sur le champ de bataille,\nJ'aurai peur d'assister au massacre,\nJ'aurai mal de leurs souffrances,\nJ'aurai honte de mon drapeau\nsouillé de sang,\nde haine,\nde vengeance,\nrapiécé pour tenir vingt ans.\n\nQuand vous me verrez passer sur le chemin de l'éternité,\nJe vous en prie, ne m'arrêtez pas,\nNe me questionnez pas, non, pas la peine,\nSachez que je n'ai rien fait pour eux,\nPour tous ces hommes, pour tous ces gens,\nJe n'ai pu leur offrir qu'un calmant,\nEn 21/27,\nLe temps d'un poème..."
+  },
+  {
+    "id": "pardon-si-j-ai-eu-pitie",
+    "title": "Pardon si j'ai eu pitié...",
+    "theme": "Engagement",
+    "text": "Quand je t'ai croisé, inconnu de mon pays,\nMystérieux bonhomme jamais vu par ici,\nPardon si j'ai eu pitié...\n\nQuand tu m'as parlé de coreligionnaires,\nDe la willaya 4 et de ta liberté,\nPardon si j'ai eu pitié...\n\nQuand je t'ai touchée, fille de mauvaise vie,\nFemme boursouflée, lavée d'un mauvais parfum,\nPardon si j'ai eu pitié...\n\nQuand je te regarde, haut-perché sur ta croix,\nQuand je donne un franc à l'aveugle du quartier,\nQuand j'embrasse une grand'mère de l'allocation,\nQuand je prie,\nQuand je pleure,\nQuand j'ouvre mon âme,\nQuand je PARLE D'AMOUR,\nPardon si j'ai pitié...\n\nPardon si j'ai pitié,\nSi j'ai un peu peur,\nS'ils me dégoûtent un peu...\nPardon pour tout cela,\nPardon pour tous ceux-là\nEt les autres que j'aime bien,\nQue j'aime,\nQue...\nJe n'aime pas, et C'EST VRAI,\nMais que VOUS\nGuérissez,\nPlaignez,\nRessuscitez,\nExaucez,\nEmbauchez,\nPar amour d'une bonne conscience\nEt d'une bonne publicité...\n\nQuand je donne l'amour à la quête du dimanche,\nQuand j'offre mon amour par mille balles\nPour la découverte du cancer,\nPardon si j'ai pitié...\n\nPardon si j'ai pitié\nPour en finir,\nPour oublier,"
+  },
+  {
+    "id": "la-vie",
+    "title": "La vie",
+    "theme": "Vie",
+    "text": "1\nLa vie\nLa vie qu'on vit\nMais qu'on vivote\nCette vie pour la bouffe\nCette vie pour la baise\nLe fric et les diplômes\nLa réussite et la mort\nCette vie\nMon Dieu\nQu'elle est moche...\n\n2\nLa vie\nLa vie qu'on vit\nEt qu'on se force\nÀ vivre\nPour soi-même\nEt pour l'autre\nEt tout le monde\nSanté\nFortune\nPrétentions\nCette vie\nMon Dieu\nQu'elle est con...\n\n3\nLa vie\nLa vie qu'on vit\nPour un oui\nPour un non\nCette vie - marathon\nRécompensée\nDynamisée\nMédicamentée\nVitaminée\nCette vie\nMon Dieu\nQu'elle est retraitée...\n\n4\nLa vie\nMoi\nLa vie que je vis\nC'est une liberté\nÀ ma façon\nAu-delà de la raison\nEt au fil des saisons\nAvec ma plume comme prison\nEt le poème en moisson\nEt ma vie\nMon Dieu\nPorte bien son nom :\nCONNERIE"
+  },
+  {
+    "id": "l-amour-existe-je-l-ai-rencontre",
+    "title": "L'amour existe, je l'ai rencontré",
+    "theme": "Amour",
+    "text": "Devant un miroir\nOù j'étais seul\nSur le journal\nOù figurait mon nom\nSur les bouches\nSur les affiches\nSur les marbres\nEt les diplômes\nLes compliments\nLes médailles\nEt les gueuletons\n\nL'amour existe\nL'amour de MOI\n\nBRAVO.\n\nYves CHOLET"
+  },
+  {
+    "id": "ce-poeme-est-mon-dernier",
+    "title": "Ce poème est mon dernier",
+    "theme": "Mort et mémoire",
+    "text": "Ce poème est mon dernier\nLe dernier la fin et la mort\nEt comme pour un défunt\nPriez\nPleurez\nFleurissez\nDoléancez\nCondoléancez\nEtceitera\n\nCe dernier poème a déjà l'odeur de la mort\nEmbaumez\nPsalmodiez\nLouez\nChantez\nParlez de moi autour de vous\nDites le mal que j'ai fait\nDites le bonheur que j'ai donné\nEt le regret\nOui\nSurtout le regret\nD'avoir mal employé\nMa vie."
+  },
+  {
+    "id": "souris-coco",
+    "title": "Souris, coco",
+    "theme": "Société",
+    "text": "Souris, coco\nSouris encore\nSouris pour la photo\nEt souris pour les autres\n\nÇa leur fait tellement plaisir\nQuand tu leur souris\nEt que tu fais le beau\n\nLa vie est belle, coco\nTout le monde est beau\n\nAllez, coco\nSouris encore une fois\nPour les salauds.\n\nLe ciel est bleu, coco\nLe soleil brille\n\nTu es marié, coco\nTu as ton gosse\nTon treizième mois\nEt l'entreprise.\n\nTu es heureux, coco\nTu fais du ski\nEt ton whisky\nIl est si bon\n\nSouris, coco\nMais ferme les yeux\nBouche les oreilles\nEt souris comme un con\n\nTu verras comme c'est bon....\n\nCOCO"
+  },
+  {
+    "id": "testament",
+    "title": "Testament",
+    "theme": "Mort",
+    "text": "Ça se passera où et quand ?\nÀ quelle date et à quelle heure ?\nFera-t-il beau ce jour-là ?\nTout sera-t-il prêt\nPour réussir ma fin ?\nLes larmes et les fleurs,\nLes orgues et les chants,\nLes cloches de l'église\nEt une belle boîte encaustiquée...\n\nOn ira à pied\nPour ne pas aller trop vite.\nLa terre sera peut-être un peu mouillée...\n\nJ'entends déjà tambouriner au-dessus de ma tête\nUne pluie de reproches et de gravillons\nComme le dernier glas d'un adieu solennel,\nEt les oisillons picorer les quelques graines\nDe quelques gerbes déjà fanées..."
+  },
+  {
+    "id": "dommage",
+    "title": "Dommage... (1)",
+    "theme": "Mémoire et enfance",
+    "text": "C'est une histoire entre proche passé et ce qu'il me reste à vivre\nJe n'ai pas vu le temps passer, seulement des passions disparaître\nHistoire trop lourde d'erreurs et de secrets\nEt un copain d'enfance choisi en victime\n\nTu sais... les souvenirs peuvent blesser quand on veut oublier ses conneries\nTu comprends ?\n\nDOMMAGE QUE CE SOIT LUI...\n\nMais s'il me fallait tout revivre aujourd'hui...\nJe ne sais pas, je ne sais plus.\nSi. Je le sais. Il faudrait qu'il se taise et me laisse réfléchir\nAlors, je referais l'histoire, mais plus belle et plus jeune aussi\n\nJe donnerais mon âme pour combattre ses pleurs\nJe donnerais mon cœur pour lui réapprendre à rire\nJe lui offrirais de la pâte à modeler\nDes cartes postales en couleur\nEt les doigts qui lui manquent\n\nÇa y est, on redevient poulbots\nSur les quais de Clichy\nLe sable nous colle aux semelles\nOn renverse les poubelles\nOn montre nos culs aux passants\nEt l'on se marre... vraiment\n\nDOMMAGE QU'IL SOIT TROP TARD\nDOMMAGE QUE C'ÉTAIT LUI..."
+  },
+  {
+    "id": "la-celtique-attitude",
+    "title": "La celtique attitude d'une Bretonne ou la troublante manifestation de la raison",
+    "theme": "Famille",
+    "text": "J'ai rêvé que j'étais mémé\nEn noir de la tête aux pieds\nJe lui ressemble tellement...\nÀ part le fichu sur la tête\nJe lui ressemble tellement...\nPar les moues et les silences\nLes lunettes et les jugements\nEt les haussements d'épaules\n\nAttentive et sévère, frêle silhouette aux fenêtres\n5 minutes de retard pour la soupe :\n« Si j'avais été aussi lambine... »\nAvec un petit souffle exaspéré du coin des lèvres\nLe bon sens, quoi...\n\nJe lui ressemble tellement...\nÀ part le chapelet noir\nEt le mouchoir brodé\nSerré dans sa main déformée\nLa guêpe écrasée par le pouce au carreau\nLa goutte au nez et l'œil humide\n\n« Faites c'que vous voulez, moi j'vais me coucher,\nDemain y fera jour... »\n\n« Mieux vaut de bons amis qu'une mauvaise famille »\n\nEt tout ça rythmé par les cloches de l'église\nLa direction des nuages, les grandes marées\nEt le bulletin paroissial\n\nEt le jour se levait timidement avec ses parfums\nDe mèche encore fumante de pétrole\nD'iode et de moisi mélangés\nDe beurre rance et de café réchauffé...\nBref...\nL'histoire d'une grand-mère éternelle..."
+  },
+  {
+    "id": "aiti",
+    "title": "AITI, une Corse d'en haut (vue d'en bas)",
+    "theme": "Amitié",
+    "dedication": "À Matthieu...",
+    "text": "Tu as vainement essayé de ressembler à ceux d'en haut, Poulbot du neuf-quatre\nAvec l'accent pointu des quartiers en béton et des centres commerciaux.\nAvec trop de manières, t'avais pas la manière, ni les mots.\nOn ne connaît pas les gens d'en haut.\nOn ne peut les comprendre quand on ne connaît que le satellite\nEt le web en couleur.\nTu es comme moi, tu es d'en bas, rez-de-jardin et au ras des couloirs d'autobus.\nEt comme moi, mon garçon, ta vie c'est le tic tac de la montre bien serrée\nAu poignet, cavalcades dans l'escalier et le tempo de la musique\nPianoté rageusement sur le bras du canapé.\n\nSais-tu que là-haut, on écoute le silence résonner de l'autre côté des montagnes...\nSais-tu que là-haut, on s'arrête pour le vent et les couleurs de l'automne...\nSais-tu que là-haut, on arrête de parler quand le soleil se lève\nPour mieux se réchauffer ?\n\nIls ont bien sûr partagé avec toi la châtaigne, le fromage et le vin,\nIls t'ont souri, donné à souper et t'ont pris dans les bras.\nMais c'était quelques jours en été-il faut bien importer des citadins\nDu continent au moins une fois par an...\nIls n'ont pas besoin de nous là-haut... l'amitié ne se vend pas\nAu détour des chemins.\nIls ne font pas de paquets cadeaux avec leur silence qui en dit long,\nEt la chaude amitié entr'eux partagée comme du pain grillé.\n\nIls ne discourent pas, ils discutent simplement.\nIls ne tendent pas la main, ils la donnent spontanément.\nIls ne rient pas pour un rien, ils échangent la souriante amitié.\nIls ne cherchent pas des raisons d'exister, ils vivent pour la vie comme elle vient.\n\nEt, quand pour un vieux d'en haut, la vie s'arrête là,\nIls partagent alors un peu plus, et se rapprochent pour se chauffer...\n\nOn a vainement essayé, toi et moi, de leur ressembler, mais y'a trop de secrets\nDans les familles et les alcôves, et trop de longs silences échangés.\nOn est produits du tourisme toi et moi, on ne fait que passer.\nToi, tu regardes où tu poses tes pas, eux ils regardent si la pluie va tomber.\nEt ce serait malhonnête malgré tout de voler leur liberté et l'accent de là-haut,\nAussi rude que la rocaille, aussi parfumé que le maquis.\n\nLa neige tombe maintenant sur les sommets,\nIl est temps de redescendre à la ville.\nPense à eux de temps en temps, écris-leur une jolie carte qu'ils liront tour à tour\nLes soirs de grand froid, quand le brouillard se pose au creux de la vallée.\nÉcris-leur des mots tout simples comme ça :\nMerci pour la senteur des champignons blottis sous la mousse,\nPour le halètement du sanglier poursuivi par la meute,\nPour ces hommes armés et camouflés qui font craquer les branches,\nPour le chant des oiseaux dérangés par les coups de feu.\nMerci pour ce ciel tout neuf que le soleil de ton île colore en bleu.\n\nEt si tu as mal à trouver le sommeil, ferme les yeux un peu plus fort.\nTu retrouveras alors les visages ridés et les mains fatiguées de ceux d'en haut,\nLes sentiers envahis de fougères et de ronces, les clochettes,\nLes aboiements des chiens, l'éclatement des châtaignes sous les pas\nEt les parfums d'herbes mélangés du maquis.\n\nEt si tu pleures un peu dans le noir de ta chambre, sois sûr que les gens d'en haut\nNe sont pas si malheureux là-bas.\n\n... Marie et Roger."
+  },
+  {
+    "id": "putain-d-hopital",
+    "title": "Putain d'hôpital",
+    "theme": "Hôpital",
+    "text": "Putain d'hôpital\nQui fait des hommes\nDes cadavres en instance\nPetits et grands hommes\nTous pareils en souffrance\nEt l'attente du départ\nDes hommes à grande gueule\nSoudainement silencieux\nÀ la porte de la mort\n\nPutain d'hôpital\nQui planifie les entrées\nLes sorties, chambres vides\nRoulement des chariots\nChuchotement des visites\nAu goutte-à-goutte\nSoupe froide et jambon\nLe café qu'on mendie\nEt ces hommes grands et forts\nQue l'on traite en enfants\n\nPutain d'hôpital\nOdeurs d'éther et d'urine\nCris et ronflements\nBeaucoup trop chaud là-dedans\nSourires et mains aux fesses\nEt la trouille du lendemain\nQui fait qui, qui fait quoi ?\nQu'est-ce que j'ai, combien de temps ?\nElle est où la réponse ?\nLes vacances, mon boulot ?\n\nPutain d'hôpital\nMurs en briques et décharge\nAscenseurs et monte-charges\nEscaliers qui ne vont nulle part\nLe bloc qui cache le soleil\nVite ! Ouvrir un peu la fenêtre\nÉcouter le chant des oiseaux\nLe voisin qui a toujours froid\nEt qui fait la gueule\nLa télé qui bouge et parle pour rien\nCe bouquin qui semble si lourd\nQuand on est sous les perf\n\nPutain d'hôpital\nPassagers immobiles\nEntre fenêtres et couloirs\nDes gens qui passent\nSans rien dire\nFleurs fanées dans le goulot en plastique\nGâteaux rassis sur la table trop loin\nPilules multicolores\nPrès de la carafe ébréchée\nCombiné qui sonne sans arrêt\n... plus facile que se déranger\n\nPutain d'hôpital\nT'as bonne mine, ça va bien ?\nLes visites du samedi\nComme seul calendrier\nLe vieux chien galeux\nQu'on ne verra plus jamais\nLes factures qui resteront impayées\nL'héritage ? On n'y a jamais pensé\nY verront bien après...\n(rire un peu lugubre\ndans cette chambre aseptisée)"
+  },
+  {
+    "id": "un-ptit-vieux-en-otage",
+    "title": "Un p'tit vieux en otage",
+    "theme": "Hôpital",
+    "text": "Putain d'hôpital\nUn p'tit vieux en otage\nAnonyme, inconnu\nDans une chambre à 4 chiffres\nD'un étage haut perché\nQui c'est celui-là ?\n\nUn vieillard, mais le cœur en révolte\nLes yeux fermés, les poings serrés\nOn t'a reconnu, vieille canaille...\nVieux résistant aux cheveux blancs\nPoète anar' et combattant\nC'est sûrement toi..."
+  },
+  {
+    "id": "2001",
+    "title": "2001",
+    "theme": "Temps et société",
+    "text": "Tourner en rond\nComme une bête en cage\n\nTourner en long et travers\nComme un pauvre type en rut\n\nNe plus savoir\nS'il faut s'asseoir\nOu marcher\n\nNe pas pouvoir décider\nDe sa mort\nDe sa vie\n\nRegarder sans voir\nEntendre sans écouter\nTrouver le temps long\nLes autres insignifiants\nLa météo insupportable\n\nTourner le dos\nAux vérités\nQue personne ne dément\n\nEt parler\nBeaucoup trop parler\nEt compliquer les choses\n\nFaire de l'évidence\nUn théorème en impasse\nImposer des idées\nQui ne veulent rien dire\n\nPoser la question\nEt donner la réponse\nFaire du mal aux amis\nSans s'en rendre compte"
+  },
+  {
+    "id": "erection-municipale",
+    "title": "Érection municipale",
+    "theme": "Politique",
+    "text": "Février 2001... précédant\nQuelques semaines l'échéance\nJ'ai décidé de provoquer par incivisme\nRefuser de voter et retourner ma carte\nAvec accusé de réception\nMa France est pourrie en dedans\nAffaires et magouilles\nTrahisons, calomnies\nAdhésions aux partis...\n\nTous les mêmes\nTous pareils\n\nAu hit-parade d'une politique politicienne\nCourse à la victoire\nPromesses déguisées\nCapital et capitaux\nComme une érection municipale\nPour les riches, par le haut\n\nPolitico-politicards\nNourris aux intrigues\nAvides de croix d'honneur\nÀ la distribution des prix\nGénéreux donateurs à la foire aux farfouilles\nQui s'encanaillent aussi\nAu marché de la Goutte d'Or\nEntre frites et merguez\nEt marchands de légumes..."
+  },
+  {
+    "id": "du-bio-sur-le-web",
+    "title": "Du bio sur le Web",
+    "theme": "Société",
+    "text": "Je suis le seul rescapé, un peu meurtri quand même, d'une époque révolue, spontanée, boutonneuse, enthousiaste, post soixante-huitarde, époque gentille et simplette, le cœur et l'amitié en bannière, pattes d'éléphant et cheveux longs...\n\nPardon à Georges et autres brillants quinquagénaires, brillants de brillantine, VRP -bien sous tous rapports-, verbe haut et dents longues et la fleur au fusil, prêts à combattre sur le WEB le racisme et l'homophobie...\n\nPardonnez à Georges cette perte de mémoire...\nLa vie s'écoule bien trop vite maintenant...\nOn ne tire plus les sonnettes d'entrées, on ne renverse plus les poubelles,\non ne fait plus éclater de pétards dans les boîtes aux lettres...\n\nOn s'abonne (forcément) à Marianne, on investit dans l'immobilier, on vote à gauche (ou pas du tout)\nOn fait du fric et des enfants, du CAC 40 et des placements.\n\nOn oublie facilement les mots simples, la lutte des classes, nos partenaires sociaux et la misère en France.\n\nOn colle des notes sur des mots nostalgiques pour faire croire qu'aujourd'hui on n'a pas changé...\nMagie des accords, des silences et des points de suspension...\nOn se surprend à adorer le chanteur ; on a payé, c'est vrai -pas trop cher- mais qu'est-ce qu'on est bien...\n\nLes Cholet, Dayan, Prioul, Le Restif et Sansiaume seront demain à la retraite, mais ils trouveront bien chacun dans un coin bien tranquille une maison de jeunes pour monter sur les planches et un guichet de banque pour toucher la pension.\n\nIls trouveront aussi peut-être un berger écolo, un goût de terroir au supermarché voisin et quelques sentiers odorants qui feront penser à Giono.\n\nJ'en soupçonne aujourd'hui quelques-uns à envisager une carrière politico-commerciale avec le budget dérisoire d'un village du Quercy."
+  },
+  {
+    "id": "pourquoi-simuler-le-bonheur",
+    "title": "Pourquoi simuler le bonheur dans des chansons à textes ?",
+    "theme": "Poésie",
+    "text": "Pourquoi simuler le bonheur dans des chansons à textes qui n'ont que des soupirs pour exprimer l'espoir ?\n\nMoi, j'ai la provoc' balbutiée d'un vieil élève obéissant qui apprend à petits mots, à petits pas, les définitions de l'ANARCHIE de mon grand maître bien aimé Fernando Andres Diez de Champigny-sur-Marne."
+  },
+  {
+    "id": "a-leo-fernando-et-autres-libertaires",
+    "title": "À Léo, Fernando... et autres libertaires",
+    "theme": "Liberté",
+    "text": "Ton chemin d'croix, c'est cette ruelle cabossée\nLe linge qui pend aux f'nêtres, un p'tit air d'accordéon\nC'est l'escalier d'bois, bancal, jamais ciré\nQui conduit à la mansarde où tu souffres ta passion\n\nTon chemin d'croix, c'est l'royaume à bon marché\nGlacial et déserté par des bourgeois trop exigeants\nC'est l'réchaud, qu'est dans un coin, taché\nD'soupe et d'café qui t'réchauffent quand t'en as le temps\n\nTon chemin d'croix, c'est ta gueule pâle et mal rasée\nDes yeux remplis d'amour pour l'homme de la rue\nC'est l'chevalet, tel un écrin, comme une offrande d'amitié\nDe mille couleurs de ROUGE et NOIR\nPour faire revivre l'Anarchie\n\nTon chemin d'croix, c'est ta souffrance en larmes de sang\nMiettes de mosaïque de feu, liquide brûlant\nPerles noires qui s'écroulent de tes mains en croix\nArtiste, poète, artisan d'une nouvelle Passion\n\nIl suffirait d'un petit rayon de soleil\nDe quelques mouettes et d'une mer bleue\nPour que mon cœur se réchauffe\nEt que tes yeux sourient aux montagnes\nEnfin débarrassées de leur manteau d'hiver\n\nIl suffirait d'un peu plus d'argent par mois\nEt d'un bloc HLM de 15 étages\nPour que les congés-payés soient des vacances\nEt que le gosse ressemble aux enfants\nDes autres\nQui vont à l'école des curés\n\nIl suffirait d'un bon coup de pied\nDans le cul du bourgeois\nPour que ses amis ne se moquent plus\nDe vos copains d'atelier qui préfèrent\nLe gros rouge des bistrots au whisky de salon\n\nIl suffirait d'un peu de pitié\nMême pas d'amour\n(ce serait trop lui demander)\nPour que le tribunal acquitte ce déserteur\nSoldat Inconnu de la Paix\n\nIl suffirait de presque rien\nOh non, de pas grand chose\nPour que tout soit plus beau\nEt que l'amour dure plus longtemps\nQu'une Journée Nationale de Charité..."
+  },
+  {
+    "id": "post-communion",
+    "title": "Post Communion",
+    "theme": "Poésie et lecteur",
+    "text": "Cher lecteur,\n\nCes quelques pages n'ont malheureusement pas déclenché chez toi l'orgasme que j'espérais...\nJe pourrais mettre ça sur le compte de la fatigue, de l'indifférence ou de l'incommunicabilité...\nJe pourrais dire aussi que ma folie t'a gagné et a provoqué sur toi une sorte de frigidité...\nMais, je vois clair, ce n'est pas ça...\n\nC'est tout simplement le refus, le dégoût, le désintéressement. Tu t'en fous. La poésie, la folie des mots, tu t'en fous. Ce qui compte pour toi, c'est le fric, le cul, les calories, l'aérobic et France-Loisirs.\n\nAlors, voilà ce que tu vas faire : tu vas prendre ta planche à voile, ton ticket-chic, ton ticket-choc, tes cassettes, ta turbo et ton Vuitton, et te les mettre où je pense...\n\nQuant à moi, je vais reprendre ma plume, taquiner la muse et sauter la bonne.\n\nCher lecteur, je te prie de bien vouloir agréer..."
   }
 ]

@@ -3,13 +3,17 @@ export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
   use: {
-    baseURL: "http://localhost:5173",
+    baseURL: "http://localhost:5174",
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
   },
   webServer: {
-    command: "npm run dev -- --host 127.0.0.1 --port 5173 --strictPort",
-    url: "http://localhost:5173",
+    command: "npm run dev -- --host 127.0.0.1 --port 5174 --strictPort",
+    url: "http://localhost:5174",
+    env: {
+      VITE_SUPABASE_URL: "https://test.supabase.co",
+      VITE_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test_key",
+    },
     reuseExistingServer: !process.env.CI,
   },
   projects: [

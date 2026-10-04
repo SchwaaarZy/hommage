@@ -3,7 +3,7 @@
 Un site de transmission exclusivement consacré aux poèmes, sans biographie.
 React, TypeScript, Vite, Tailwind CSS, Framer Motion, Lucide et jsPDF.
 
-Le parcours principal tient sur une seule page : un hommage centré et les titres des poèmes. Cliquer sur un titre déplie le texte juste en dessous ; cliquer de nouveau le referme. Un seul poème reste ouvert à la fois. Aucun menu, filtre, favori, citation ou bouton de partage n’encombre ce parcours.
+Le parcours principal tient sur une seule page : un hommage centré et les titres des poèmes classés alphabétiquement. Cliquer sur un titre déplie le texte juste en dessous ; cliquer de nouveau le referme. Un seul poème reste ouvert à la fois. Un bouton J’aime et son compteur partagé apparaissent à côté de chaque titre. Sur mobile, le menu Poèmes/Ouvrages reste accessible dans une barre flottante.
 
 ## Démarrage
 
@@ -29,7 +29,7 @@ Pour l’aperçu avec le bouton **Go Live**, Live Server sert le dossier `dist` 
 
 ## Ajouter les véritables œuvres
 
-Le site contient les neuf poèmes fournis sous forme d’images signées Yves Cholet. Les textes de démonstration ont été remplacés par leurs transcriptions. Les illustrations originales sont conservées et accessibles depuis chaque œuvre. Aucune date de rédaction n’est inventée.
+Le site contient 25 textes transcrits à partir des 29 pages fournies, signées Yves Cholet. Les illustrations ne sont pas intégrées pour le moment. Aucune date de rédaction n’est inventée.
 
 Les textes sont regroupés dans `assets/poemes.json`. Le guide `assets/README.md` explique le format, l’ajout de poèmes, les images sources et les dédicaces.
 
@@ -45,13 +45,24 @@ Les thèmes, l’index, les temps de lecture et les PDF se mettent à jour autom
 - Lecture intégrale sur place, avec volets accessibles au clavier et historique du navigateur conservé.
 - Ouverture et fermeture progressives, sans retour en haut de page lors de la fermeture. Les animations et le défilement respectent la préférence de réduction des mouvements, y compris lorsqu’elle change pendant la visite.
 - Liens directs `/#poeme/identifiant`, à partager en copiant l’adresse de la page.
-- Versions illustrées accessibles dans un nouvel onglet, sans charger les neuf images lors de l’ouverture de la page.
+- J’aime partagés et compteur par poème, enregistrés dans Supabase.
 - Les anciens outils sont conservés sur les routes secondaires `/#library`, `/#favorites`, `/#index` et `/#collections`, sans lien dans le parcours principal.
-- Polices servies localement ; aucun suivi ni service distant à l’utilisation.
+- Polices servies localement ; seuls les J’aime partagés utilisent Supabase, sans outil d’analyse d’audience.
+
+## J’aime partagés
+
+Le compteur est commun aux visiteurs. Chaque visiteur reçoit une identité anonyme Supabase ; la base n’accepte qu’un J’aime par personne et par poème. Les identités anonymes restent propres à leur navigateur et peuvent être recréées si ses données sont effacées.
+
+1. Activer **Anonymous Sign-Ins** dans les réglages d’authentification Supabase.
+2. Exécuter `supabase/schema.sql` dans l’éditeur SQL du projet.
+3. Copier `.env.example` vers `.env.local` et renseigner l’URL du projet et sa clé `sb_publishable`.
+4. Redémarrer Vite avec `npm run dev`.
+
+La clé publishable est destinée au navigateur. Ne jamais utiliser une clé `service_role` côté client. Les règles RLS limitent chaque utilisateur à ses propres J’aime ; une fonction SQL séparée expose uniquement les totaux.
 
 ## Déploiement
 
-Publier le dossier `dist` obtenu avec `npm run build` sur un hébergement statique en HTTPS. Aucun serveur applicatif n’est nécessaire. Le routage par fragment permet l’ouverture directe des poèmes sans configuration de réécriture. Pour une publication dans un sous-dossier, configurer `base` dans `vite.config.ts`.
+Publier le dossier `dist` obtenu avec `npm run build` sur un hébergement statique en HTTPS. Les J’aime utilisent le projet Supabase configuré dans les variables `VITE_SUPABASE_URL` et `VITE_SUPABASE_PUBLISHABLE_KEY`. Le routage par fragment permet l’ouverture directe des poèmes sans configuration de réécriture. Pour une publication dans un sous-dossier, configurer `base` dans `vite.config.ts`.
 
 ## Ressources
 
