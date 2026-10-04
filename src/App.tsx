@@ -352,14 +352,6 @@ function App() {
   const activeNavView = current.view === "ouvrages" ? "ouvrages" : "poemes";
   const simpleHeader = (
     <header className="simple-header">
-      <a
-        className="simple-brand"
-        href="#poemes"
-        aria-label="Les mots de Coco, accueil"
-        title="Accueil"
-      >
-        <BretonFlag />
-      </a>
       <nav className="simple-main-nav" aria-label="Navigation principale">
         {navItems.map((item) => (
           <a
@@ -504,7 +496,7 @@ function App() {
               Les mots de <span>Coco</span>
             </h1>
             <p className="simple-remembrance">
-              Dont les mots continueront de traverser le temps.
+              Ils continueront de traverser le temps.
             </p>
             <p className="simple-memorial-date">
               Décédé le <time dateTime="2026-09-21">21 septembre 2026</time>
@@ -629,14 +621,6 @@ function App() {
         Aller au contenu
       </a>
       <header className="site-header">
-        <a
-          href="#poemes"
-          className="brand"
-          aria-label="Les mots de Coco, accueil"
-          title="Accueil"
-        >
-          <BretonFlag />
-        </a>
         <nav className="desktop-nav" aria-label="Navigation principale">
           {navItems.map((item) => (
             <a
@@ -890,7 +874,7 @@ function App() {
         <p>
           À la mémoire de notre Coco,
           <br />
-          dont les mots continueront de traverser le temps.
+          Ils continueront de traverser le temps.
         </p>
         <span>Décédé le 21 septembre 2026</span>
         <div className="footer-bottom">

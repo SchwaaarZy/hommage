@@ -11,33 +11,20 @@
   );
 }
 .simple-header {
+  position: relative;
   width: min(880px, calc(100% - 64px));
   margin-inline: auto;
-  padding-block: 30px 12px;
+  min-height: 44px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.simple-brand {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
 }
 .simple-ouvrages > svg {
   color: var(--gold);
 }
-.simple-brand .breton-mark,
-.brand .breton-mark {
-  display: block;
-  width: 36px;
-  height: 24px;
-  flex: 0 0 auto;
-}
 .simple-main-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 26px;
@@ -62,8 +49,7 @@
   height: 1px;
   background: var(--gold);
 }
-.simple-main-nav a:focus-visible,
-.simple-brand:focus-visible {
+.simple-main-nav a:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
@@ -365,16 +351,7 @@
   }
   .simple-header {
     width: calc(100% - 24px);
-    padding-block: 30px 8px;
-    gap: 12px;
-  }
-  .simple-brand {
-    width: 44px;
-    height: 44px;
-  }
-  .simple-brand .breton-mark {
-    width: 33px;
-    height: 22px;
+    min-height: 0;
   }
   .simple-main-nav {
     position: fixed;
@@ -437,11 +414,11 @@
     margin-top: 26px;
   }
   .simple-index summary {
-    font-size: 24px;
-    min-height: 72px;
+    font-size: 21px;
+    min-height: 64px;
     grid-template-columns: 18px minmax(0, 1fr) 18px;
     gap: 8px;
-    padding: 20px 52px;
+    padding: 16px 40px;
   }
   .simple-like-button {
     top: 14px;
@@ -517,20 +494,10 @@
   top: 0;
   z-index: 10;
 }
-.brand {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
-}
-.brand .breton-mark {
-  display: block;
-  width: 36px;
-  height: 24px;
-}
 .desktop-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 38px;
   align-self: stretch;
@@ -557,6 +524,7 @@
 .header-actions {
   display: flex;
   gap: 10px;
+  margin-left: auto;
 }
 .icon-button {
   background: transparent;
@@ -1367,10 +1335,6 @@
   .site-header {
     height: 72px;
     padding-inline: 16px;
-  }
-  .brand .breton-mark {
-    width: 33px;
-    height: 22px;
   }
   .header-actions {
     gap: 0;

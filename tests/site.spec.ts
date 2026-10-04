@@ -95,6 +95,9 @@ test("accueil simple et accès aux poèmes", async ({ page }, testInfo) => {
     name: "Coco",
   });
   await expect(portrait).toBeVisible();
+  await expect(page.locator(".simple-remembrance")).toHaveText(
+    "Ils continueront de traverser le temps.",
+  );
   await page.evaluate(() => document.fonts.ready);
   await expect(page.getByRole("searchbox")).toHaveCount(0);
   await expect(page.locator(".simple-index summary")).toHaveCount(works.length);
@@ -107,10 +110,7 @@ test("accueil simple et accès aux poèmes", async ({ page }, testInfo) => {
   ).toBeLessThanOrEqual(360);
   await expect(page.getByText(/La dictature, c’est « ferme ta gueule »/)).toBeVisible();
   await expect(page.getByRole("navigation")).toHaveCount(1);
-  await expect(
-    page.getByRole("link", { name: "Les mots de Coco, accueil" }),
-  ).toBeVisible();
-  await expect(page.locator(".simple-brand")).toHaveText("");
+  await expect(page.locator(".simple-header svg, .simple-header .breton-mark")).toHaveCount(0);
   await expect(
     page
       .getByRole("navigation", { name: "Navigation principale" })
@@ -155,15 +155,37 @@ test("menu Poèmes et Ouvrages", async ({ page }) => {
       .map((poem) => poem.title),
   );
 });
-test("drapeau breton dans les en-têtes et pieds de page", async ({ page }) => {
+test("drapeau breton uniquement en bas et menus centrés", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".simple-header .breton-mark")).toBeVisible();
+  await expect(page.locator(".simple-header .simple-brand")).toHaveCount(0);
+  await expect(page.locator(".simple-header .breton-mark")).toHaveCount(0);
   await expect(page.locator(".simple-footer .breton-mark")).toBeVisible();
-  await expect(page.locator(".simple-brand")).toHaveText("");
+  const simpleHeaderCenterOffset = await page
+    .locator(".simple-header")
+    .evaluate((header) => {
+      const nav = header.querySelector(".simple-main-nav")!.getBoundingClientRect();
+      const bounds = header.getBoundingClientRect();
+      return Math.abs(
+        nav.left + nav.width / 2 - (bounds.left + bounds.width / 2),
+      );
+    });
+  expect(simpleHeaderCenterOffset).toBeLessThan(2);
   await page.goto("/#library");
-  await expect(page.locator(".site-header .brand .breton-mark")).toBeVisible();
-  await expect(page.locator(".site-header .brand")).toHaveText("");
+  await expect(page.locator(".site-header .brand")).toHaveCount(0);
+  await expect(page.locator(".site-header .breton-mark")).toHaveCount(0);
   await expect(page.locator(".site-footer .breton-mark")).toBeVisible();
+  if ((page.viewportSize()?.width ?? 0) > 700) {
+    const desktopNavCenterOffset = await page
+      .locator(".site-header")
+      .evaluate((header) => {
+        const nav = header.querySelector(".desktop-nav")!.getBoundingClientRect();
+        const bounds = header.getBoundingClientRect();
+        return Math.abs(
+          nav.left + nav.width / 2 - (bounds.left + bounds.width / 2),
+        );
+      });
+    expect(desktopNavCenterOffset).toBeLessThan(2);
+  }
 });
 test("recherche, expression, thème et état vide", async ({ page }) => {
   await page.goto("/#library");
@@ -379,6 +401,14 @@ test("ergonomie et rendu mobile", async ({ page }, testInfo) => {
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
   await expect(page.getByRole("searchbox")).toHaveCount(0);
+  const paradiseTitle = page.locator(".simple-index summary h2").filter({
+    hasText: "Le Paradis des poètes",
+  });
+  expect(
+    await paradiseTitle.evaluate((element) =>
+      element.getBoundingClientRect().height,
+    ),
+  ).toBeLessThan(30);
   const firstPoemTop = await page
     .locator(".simple-index summary")
     .first()
