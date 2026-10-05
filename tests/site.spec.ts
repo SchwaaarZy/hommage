@@ -137,10 +137,13 @@ test("accueil simple et accès aux poèmes", async ({ page }, testInfo) => {
   expect(errors).toEqual([]);
 });
 test("menu Poèmes et Ouvrages", async ({ page }) => {
-  await page.goto("/#ouvrages");
+  await page.goto("/");
+  await page.getByRole("link", { name: "OUVRAGES", exact: true }).click();
   await expect(page).toHaveTitle("Les mots de Coco");
   await expect(page.getByRole("heading", { name: "Ouvrages" })).toBeVisible();
   await expect(page.getByText("Aucun ouvrage pour le moment.")).toBeVisible();
+  await expect(page.getByRole("img", { name: "Coco" })).toBeVisible();
+  await expect(page.getByText("À la mémoire de notre Coco")).toBeVisible();
   await expect(
     page.getByRole("link", { name: "OUVRAGES", exact: true }),
   ).toHaveAttribute("aria-current", "page");
@@ -414,19 +417,14 @@ test("ergonomie et rendu mobile", async ({ page }, testInfo) => {
     .first()
     .evaluate((element) => element.getBoundingClientRect().top);
   expect(firstPoemTop).toBeLessThan(844);
-  const iconGap = await page
-    .locator(".simple-index li")
+  const chevronLeftOffset = await page
+    .locator(".simple-index summary")
     .first()
-    .evaluate((item) => {
-      const chevron = item
-        .querySelector("summary > svg")!
-        .getBoundingClientRect();
-      const likeButton = item
-        .querySelector(".simple-like-button")!
-        .getBoundingClientRect();
-      return likeButton.left - chevron.right;
+    .evaluate((summary) => {
+      const chevron = summary.querySelector("svg")!.getBoundingClientRect();
+      return chevron.left - summary.getBoundingClientRect().left;
     });
-  expect(iconGap).toBeGreaterThanOrEqual(8);
+  expect(chevronLeftOffset).toBeLessThanOrEqual(12);
   for (const link of await page.locator(".simple-index summary").all()) {
     const bounds = await link.boundingBox();
     expect(bounds?.width).toBeGreaterThanOrEqual(44);

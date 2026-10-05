@@ -376,6 +376,20 @@ function App() {
       </p>
     </footer>
   );
+  const simpleMemorial = (
+    <>
+      <figure className="simple-portrait">
+        <img
+          src={cocoPortrait}
+          alt="Coco"
+          width={1080}
+          height={608}
+          fetchPriority="high"
+        />
+      </figure>
+      <p className="simple-dedication">À la mémoire de notre Coco</p>
+    </>
+  );
   const iconButton = (
     label: string,
     action: () => void,
@@ -450,6 +464,7 @@ function App() {
         {simpleHeader}
         <main id="main" tabIndex={-1} className="simple-main">
           <section className="simple-tribute simple-ouvrages">
+            {simpleMemorial}
             <h1 ref={heading} tabIndex={-1} className="simple-title">
               Ouvrages
             </h1>
@@ -480,18 +495,7 @@ function App() {
             className="simple-tribute"
             aria-label="Hommage à notre Coco"
           >
-            <figure className="simple-portrait">
-              <img
-                src={cocoPortrait}
-                alt="Coco"
-                width={1080}
-                height={608}
-                fetchPriority="high"
-              />
-            </figure>
-            <p className="simple-dedication">
-              À la mémoire de notre Coco
-            </p>
+            {simpleMemorial}
             <h1 ref={heading} tabIndex={-1} className="simple-title">
               Les mots de <span>Coco</span>
             </h1>

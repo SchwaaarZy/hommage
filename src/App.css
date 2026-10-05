@@ -422,8 +422,9 @@
     padding: 16px 40px;
   }
   .simple-index summary > svg {
-    position: absolute;
-    right: 64px;
+    grid-column: 1;
+    justify-self: start;
+    margin-left: -28px;
   }
   .simple-like-button {
     top: 14px;
