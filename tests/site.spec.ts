@@ -425,6 +425,21 @@ test("ergonomie et rendu mobile", async ({ page }, testInfo) => {
       return chevron.left - summary.getBoundingClientRect().left;
     });
   expect(chevronLeftOffset).toBeLessThanOrEqual(12);
+  const iconCenterOffset = await page
+    .locator(".simple-index li")
+    .first()
+    .evaluate((item) => {
+      const chevron = item
+        .querySelector("summary > svg")!
+        .getBoundingClientRect();
+      const heart = item
+        .querySelector(".simple-like-button svg")!
+        .getBoundingClientRect();
+      return Math.abs(
+        chevron.top + chevron.height / 2 - (heart.top + heart.height / 2),
+      );
+    });
+  expect(iconCenterOffset).toBeLessThanOrEqual(1);
   for (const link of await page.locator(".simple-index summary").all()) {
     const bounds = await link.boundingBox();
     expect(bounds?.width).toBeGreaterThanOrEqual(44);
