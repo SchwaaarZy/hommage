@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import type { ReactNode } from "react";
+import type { ClipboardEvent, MouseEvent, ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -37,6 +37,14 @@ type View =
   | "collections"
   | "favorites"
   | "index";
+
+function blockCopy(event: ClipboardEvent<HTMLElement>) {
+  event.preventDefault();
+}
+
+function blockContextMenu(event: MouseEvent<HTMLElement>) {
+  event.preventDefault();
+}
 
 function BretonFlag() {
   const ermines = [
@@ -409,8 +417,10 @@ function App() {
   function renderCard(poem: Poem, index: number) {
     return (
       <motion.article
-        className="poem-card"
+        className="poem-card copy-protected"
         key={poem.id}
+        onCopy={blockCopy}
+        onContextMenu={blockContextMenu}
         initial={reduceMotion ? false : { opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -518,8 +528,10 @@ function App() {
             </p>
           )}
           <ul
-            className="simple-index"
+            className="simple-index copy-protected"
             aria-busy={isSupabaseConfigured && !likesReady}
+            onCopy={blockCopy}
+            onContextMenu={blockContextMenu}
           >
             {poemsAlphabetically.map((poem) => {
               const isLiked = likedPoemIds.includes(poem.id);
@@ -689,7 +701,11 @@ function App() {
               </h1>
               <p>Un recueil complet ou quelques poèmes réunis par thème.</p>
             </div>
-            <div className="complete-collection">
+            <div
+              className="complete-collection copy-protected"
+              onCopy={blockCopy}
+              onContextMenu={blockContextMenu}
+            >
               <BookOpen size={54} strokeWidth={1} />
               <div>
                 <span className="eyebrow">L’ENSEMBLE DES POÈMES</span>
@@ -710,7 +726,12 @@ function App() {
             <h2 className="subheading">Les recueils thématiques</h2>
             <div className="collections-grid">
               {themes.map((item, index) => (
-                <article className="theme-collection" key={item}>
+                <article
+                  className="theme-collection copy-protected"
+                  key={item}
+                  onCopy={blockCopy}
+                  onContextMenu={blockContextMenu}
+                >
                   <div className="collection-number">
                     {String(index + 1).padStart(2, "0")}
                   </div>
@@ -745,7 +766,11 @@ function App() {
               </h1>
               <p>{poems.length} poèmes, classés par ordre alphabétique.</p>
             </div>
-            <div className="poem-index">
+            <div
+              className="poem-index copy-protected"
+              onCopy={blockCopy}
+              onContextMenu={blockContextMenu}
+            >
               {[...poems]
                 .sort((first, second) =>
                   first.title.localeCompare(second.title, "fr"),

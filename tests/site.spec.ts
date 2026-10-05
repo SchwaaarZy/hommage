@@ -158,6 +158,46 @@ test("menu Poèmes et Ouvrages", async ({ page }) => {
       .map((poem) => poem.title),
   );
 });
+test("copie et sélection bloquées sur les poèmes", async ({ page }) => {
+  await page.goto("/");
+  const simpleIndex = page.locator(".simple-index");
+  await expect(simpleIndex).toHaveCSS("user-select", "none");
+  await page
+    .getByRole("button", { name: firstPoem.title, exact: true })
+    .click();
+  const simplePoemText = page.locator(".simple-verses p").first();
+  const simpleCopyBlocked = await simplePoemText.evaluate((element) => {
+    const event = new ClipboardEvent("copy", {
+      bubbles: true,
+      cancelable: true,
+    });
+    element.dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+  expect(simpleCopyBlocked).toBe(true);
+  const contextMenuBlocked = await simplePoemText.evaluate((element) => {
+    const event = new MouseEvent("contextmenu", {
+      bubbles: true,
+      cancelable: true,
+    });
+    element.dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+  expect(contextMenuBlocked).toBe(true);
+
+  await page.goto("/#library");
+  const poemCard = page.locator(".poem-card").first();
+  await expect(poemCard).toHaveCSS("user-select", "none");
+  const cardCopyBlocked = await poemCard.evaluate((element) => {
+    const event = new ClipboardEvent("copy", {
+      bubbles: true,
+      cancelable: true,
+    });
+    element.dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+  expect(cardCopyBlocked).toBe(true);
+});
 test("drapeau breton uniquement en bas et menus centrés", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".simple-header .simple-brand")).toHaveCount(0);

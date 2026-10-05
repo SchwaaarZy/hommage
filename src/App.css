@@ -10,6 +10,12 @@
     color-mix(in srgb, var(--ink) 1.5%, transparent) 4px
   );
 }
+.copy-protected,
+.copy-protected * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
 .simple-header {
   position: relative;
   width: min(880px, calc(100% - 64px));
