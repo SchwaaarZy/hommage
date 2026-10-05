@@ -414,6 +414,19 @@ test("ergonomie et rendu mobile", async ({ page }, testInfo) => {
     .first()
     .evaluate((element) => element.getBoundingClientRect().top);
   expect(firstPoemTop).toBeLessThan(844);
+  const iconGap = await page
+    .locator(".simple-index li")
+    .first()
+    .evaluate((item) => {
+      const chevron = item
+        .querySelector("summary > svg")!
+        .getBoundingClientRect();
+      const likeButton = item
+        .querySelector(".simple-like-button")!
+        .getBoundingClientRect();
+      return likeButton.left - chevron.right;
+    });
+  expect(iconGap).toBeGreaterThanOrEqual(8);
   for (const link of await page.locator(".simple-index summary").all()) {
     const bounds = await link.boundingBox();
     expect(bounds?.width).toBeGreaterThanOrEqual(44);

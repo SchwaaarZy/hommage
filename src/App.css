@@ -414,11 +414,16 @@
     margin-top: 26px;
   }
   .simple-index summary {
+    position: relative;
     font-size: 21px;
     min-height: 64px;
     grid-template-columns: 18px minmax(0, 1fr) 18px;
     gap: 8px;
     padding: 16px 40px;
+  }
+  .simple-index summary > svg {
+    position: absolute;
+    right: 64px;
   }
   .simple-like-button {
     top: 14px;
